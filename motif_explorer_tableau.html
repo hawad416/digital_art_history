@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floral vs Geometric: Yugoslav Textiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1410;
+  --paper:#f7f2e8;
+  --floral:#7a3a8a;
+  --floral-light:#c49ad4;
+  --floral-dim:#e8d8f2;
+  --geo:#1e5c8a;
+  --geo-light:#6aaed4;
+  --geo-dim:#d0e6f4;
+  --both:#b8860b;
+  --both-light:#e8c84a;
+  --neither:#9a9080;
+  --muted:#7a6a58;
+  --rule:#d4c8b0;
+}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+
+.masthead{
+  border-bottom:2px solid var(--ink);
+  padding:2.5rem 4rem 1.5rem;
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;
+}
+.masthead h1{font-size:3rem;font-weight:300;line-height:1;letter-spacing:-0.02em}
+.masthead h1 .fw{font-style:italic;color:var(--floral)}
+.masthead h1 .gw{font-style:italic;color:var(--geo)}
+.masthead-sub{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted);text-align:right;line-height:2}
+
+.intro-strip{
+  background:var(--ink);color:var(--paper);
+  padding:1.2rem 4rem;display:flex;gap:4rem;align-items:center;flex-wrap:wrap;
+}
+.intro-strip p{font-size:0.95rem;font-weight:300;line-height:1.6;max-width:500px;font-style:italic;color:#d4c8b0}
+.big-num{font-size:4rem;font-weight:300;line-height:1}
+.big-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:#9a8c78;margin-top:4px}
+
+.section{padding:3rem 4rem;border-bottom:1px solid var(--rule)}
+.section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem}
+.section-title{font-size:1.8rem;font-weight:300;margin-bottom:0.4rem}
+.section-desc{font-size:0.95rem;color:var(--muted);font-style:italic;line-height:1.6;max-width:600px;margin-bottom:2rem}
+
+.legend{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:0.5rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.04em}
+.leg-swatch{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+
+/* FINDING CARDS */
+.finding-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:2rem}
+.finding-card{background:var(--paper);padding:1.25rem 1.5rem;position:relative;overflow:hidden}
+.finding-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.finding-card.f-floral::after{background:var(--floral)}
+.finding-card.f-geo::after{background:var(--geo)}
+.finding-card.f-both::after{background:var(--both)}
+.finding-card.f-n::after{background:var(--neither)}
+.fc-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.4rem;text-transform:uppercase}
+.fc-num{font-size:2.4rem;font-weight:300;line-height:1;margin-bottom:0.2rem}
+.fc-sub{font-size:0.82rem;color:var(--muted);font-style:italic;line-height:1.4}
+
+/* UNIT CHART — waffle */
+.unit-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem}
+.unit-country{}
+.uc-name{font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.6rem;text-transform:uppercase}
+.unit-row{display:flex;flex-wrap:wrap;gap:2px;max-width:500px}
+.unit-sq{width:14px;height:14px;border-radius:1px;cursor:default;flex-shrink:0;transition:transform 0.12s}
+.unit-sq:hover{transform:scale(1.6);z-index:5;position:relative}
+.unit-sq.floral{background:var(--floral)}
+.unit-sq.geo{background:var(--geo)}
+.unit-sq.both{background:var(--both)}
+.unit-sq.neither{background:var(--neither)}
+.uc-stats{font-size:0.8rem;color:var(--muted);font-style:italic;margin-top:0.5rem;line-height:1.6}
+
+/* SLOPE CHART */
+.slope-wrap{position:relative}
+
+/* SPLIT BARS — gender by country */
+.split-table{width:100%;border-collapse:collapse}
+.split-table td{padding:0.3rem 0.5rem;vertical-align:middle}
+.split-label{font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);width:120px;text-align:right;letter-spacing:0.04em}
+.split-bar-wrap{position:relative;height:22px;flex:1}
+.split-bars{display:flex;height:100%;gap:1px}
+.split-seg{height:100%;transition:opacity 0.2s;cursor:default}
+.split-seg:hover{opacity:0.75}
+.split-pct{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);width:36px;text-align:left;padding-left:6px}
+
+/* OBJECT HEATMAP */
+.heat-table{width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:0.6rem}
+.heat-table th{padding:0.5rem 0.4rem;color:var(--muted);font-weight:400;letter-spacing:0.05em;text-align:center;border-bottom:1px solid var(--rule);font-size:0.58rem}
+.heat-table td{padding:0.3rem 0.4rem;text-align:center}
+.heat-table .rl{text-align:left;color:var(--muted);font-size:0.6rem;padding-right:0.8rem;white-space:nowrap}
+.hc{border-radius:2px;padding:0.25rem 0.3rem;display:inline-block;min-width:44px;text-align:center;line-height:1.3}
+.hc .hn{font-size:0.78rem;font-family:'Cormorant Garamond',serif;display:block}
+.hc .hp{font-size:0.52rem;opacity:0.7;display:block}
+
+/* SCATTER: floral rate vs geo rate per object × country */
+.scatter-wrap{position:relative}
+
+/* INSIGHT BOX */
+.insight{background:var(--ink);color:var(--paper);padding:1.5rem 2rem;border-radius:0;margin-top:2rem}
+.insight-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a8c78;margin-bottom:0.5rem}
+.insight p{font-size:0.92rem;font-style:italic;color:#d4c8b0;line-height:1.7}
+.insight strong{color:var(--paper);font-style:normal;font-weight:500}
+
+.tooltip{position:fixed;background:var(--ink);color:var(--paper);padding:0.5rem 0.9rem;font-size:0.72rem;font-family:'Space Mono',monospace;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;border-left:3px solid var(--floral);max-width:220px;line-height:1.6}
+
+/* TABLEAU PLACEHOLDER */
+.tableau-placeholder{
+  margin-top:2rem;
+  border:1.5px dashed var(--rule);
+  border-radius:0;
+  background:repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 6px,
+    rgba(212,200,176,0.18) 6px,
+    rgba(212,200,176,0.18) 7px
+  );
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:340px;padding:2.5rem;
+  position:relative;
+}
+.tableau-placeholder::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:repeating-linear-gradient(90deg,var(--rule) 0,var(--rule) 8px,transparent 8px,transparent 16px);
+}
+.tp-icon{
+  font-family:'Space Mono',monospace;font-size:2.2rem;
+  color:var(--rule);margin-bottom:1rem;letter-spacing:-0.05em;
+}
+.tp-label{
+  font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:0.4rem;
+}
+.tp-title{
+  font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;
+  color:var(--muted);margin-bottom:0.5rem;text-align:center;
+}
+.tp-instruction{
+  font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.06em;
+  color:var(--rule);text-align:center;line-height:1.8;max-width:440px;
+}
+.tp-instruction code{
+  background:rgba(212,200,176,0.3);padding:0.1rem 0.4rem;
+  border-radius:2px;font-size:0.58rem;letter-spacing:0.04em;
+}
+.tp-divider{
+  display:flex;align-items:center;gap:1rem;width:100%;max-width:500px;margin:1.5rem 0;
+}
+.tp-divider::before,.tp-divider::after{content:'';flex:1;height:1px;background:var(--rule)}
+.tp-divider span{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--rule);letter-spacing:0.1em;text-transform:uppercase}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeUp 0.45s ease both}
+.section:nth-child(3){animation-delay:.05s}
+.section:nth-child(4){animation-delay:.1s}
+.section:nth-child(5){animation-delay:.15s}
+.section:nth-child(6){animation-delay:.2s}
+.section:nth-child(7){animation-delay:.25s}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1><span class="fw">Floral</span> versus<br><span class="gw">Geometric</span><br>in Yugoslav Textiles</h1>
+  <div class="masthead-sub">
+    Henry Art Gallery <br>
+    ART H 209: Digital Art History<br>
+    University of Washington
+  </div>
+</div>
+
+<div class="intro-strip">
+  <div>
+    <div class="big-num" style="color:var(--geo-light)" id="pct-geo">—</div>
+    <div class="big-label">INCLUDE GEOMETRIC MOTIF</div>
+  </div>
+  <p>The central research question: is there a relationship between country of origin, gender, and visual motif type across the Henry Gallery's Yugoslav textile collection? The data tells a clear story: geometric dominates everywhere, but <em>how much floral appears</em> varies sharply by region and garment type.</p>
+  <div>
+    <div class="big-num" style="color:var(--floral-light)" id="pct-floral">—</div>
+    <div class="big-label">INCLUDE FLORAL MOTIF</div>
+  </div>
+</div>
+
+<!-- SECTION 1: Summary finding cards -->
+<div class="section">
+  <div class="section-label" style="color:var(--geo)">01: Collection Overview</div>
+  <div class="section-title">The motif landscape at a glance</div>
+  <div class="section-desc">How do the four motif categories distribute across all 430+ items? These totals set the baseline for every comparison that follows.</div>
+  <div class="finding-row" id="finding-row"></div>
+  <canvas id="overview-canvas" role="img" aria-label="Proportional bar showing motif breakdown across all regions"></canvas>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 01</div>
+    <div class="tp-title">Collection overview visualization</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: Unit chart -->
+<div class="section">
+  <div class="section-label" style="color:var(--floral)">02: Every Item, One Square</div>
+  <div class="section-title">What does each regional collection look like?</div>
+  <div class="section-desc">Each square is one textile item, you can feel the scale difference between Croatia's 150+ items and Montenegro's 7. Items are sorted: geometric first, then mixed, then floral, then neither. A blue-heavy grid means a geometric-dominant collection; a purple-heavy one suggests more floral tradition.</div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--geo)"></div>Geometric only</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Floral only</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--both)"></div>Both</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--neither)"></div>Neither</div>
+  </div>
+  <div class="unit-grid" id="unit-grid"></div>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 02</div>
+    <div class="tp-title">Unit / waffle chart by region</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: Proportional split bars by country -->
+<div class="section">
+  <div class="section-label" style="color:var(--geo)">03: Regional Proportions</div>
+  <div class="section-title">Where does floral appear most?</div>
+  <div class="section-desc">Each row is 100% of a region's collection, split by motif type. This normalizes for size so Croatia and Montenegro are comparable. The key question: does any region stand out as distinctly more floral or more geometric?</div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--geo)"></div>Geometric only</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Floral only</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--both)"></div>Both</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--neither)"></div>Neither</div>
+  </div>
+  <table class="split-table" id="split-table"></table>
+  <div class="insight">
+    <div class="insight-label">Reading the chart</div>
+    <p>Croatia stands out as the most floral region. Macedonia and Serbia skew most geometric. Montenegro's sample size is tiny, and makes it hard to generalize. </p>
+  </div>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 03</div>
+    <div class="tp-title">Regional proportions — 100% stacked view</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: Gender comparison -->
+<div class="section">
+  <div class="section-label" style="color:var(--floral)">04: Gender & Motif</div>
+  <div class="section-title">Do women's and men's garments differ in motif?</div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--geo)"></div>Geometric only</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Floral only</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--both)"></div>Both</div>
+    <div class="leg-item"><div class="leg-swatch" style="background:var(--neither)"></div>Neither</div>
+  </div>
+  <table class="split-table" id="gender-table"></table>
+  <canvas id="gender-slope" style="display:block;width:100%;margin-top:2rem" height="320" role="img" aria-label="Slope chart comparing floral and geometric rates between women and men by region"></canvas>
+  <div class="insight">
+    <div class="insight-label">Key finding: gender hypothesis</div>
+    <p>Men's items are <strong>strikingly more geometric</strong> than women's across every region. Women's garments are where mixed (both floral and geometric) patterns concentrate. </p>
+  </div>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 04</div>
+    <div class="tp-title">Gender &amp; motif comparison</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5: Object type heatmap -->
+<div class="section">
+  <div class="section-label" style="color:var(--geo)">05: Object Type & Motif</div>
+  <div class="section-title">Which garments carry floral motifs?</div>
+  <div class="section-desc">Heatmap of floral prevalence: darker purple = higher proportion of floral items in that country + garment combination. Empty = that garment type doesn't appear in that country's collection. Numbers show total items; percentage shows floral rate.</div>
+  <div style="overflow-x:auto" id="heatmap-wrap"></div>
+  <div class="insight">
+    <div class="insight-label">What this reveals</div>
+    <p>Kerchiefs and caps are the most floral garment types, particularly in Croatia's Posavina region. Stockings, aprons, and belts are almost entirely geometric across all regions. <strong>This suggests floral motifs were concentrated in face-framing and head accessories</strong> the most visible, identity-expressing parts of a costume, while structural garments default to geometric pattern-weaving.</p>
+  </div>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 05</div>
+    <div class="tp-title">Object type &amp; motif heatmap</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6: Scatter — country position on floral vs geo axis -->
+<div class="section">
+  <div class="section-label" style="color:var(--floral)">06:Regional Position</div>
+  <div class="section-title">Mapping each region on the floral–geometric axis</div>
+  <div class="section-desc">Each bubble is a country, positioned by its floral-only % (vertical) and geometric-only % (horizontal). Size = collection size. Regions in the bottom-right are dominantly geometric; top-left would be dominantly floral. Do any countries share a visual identity?</div>
+  <canvas id="scatter-canvas" role="img" aria-label="Scatter plot of floral vs geometric rates by country, bubble sized by collection size"></canvas>
+  <div class="insight">
+    <div class="insight-label">Contextualizing the scatter</div>
+    <p>No region is "floral dominant" and every country sits closer to the geometric axis. But the <strong>distance from the diagonal</strong> matters: Croatia and Macedonia have notably different floral rates despite similar geometric rates, which points to distinct regional aesthetic traditions. Bosnia-Herzegovina and Serbia cluster close together, suggesting shared visual conventions despite political separation.</p>
+  </div>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 06</div>
+    <div class="tp-title">Regional position scatter plot</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: Slope — floral rate by object type across countries -->
+<div class="section">
+  <div class="section-label" style="color:var(--geo)">07: Case Study: Kerchiefs & Caps</div>
+  <div class="section-title">The most floral garment types, by region</div>
+  <div class="section-desc">A slope chart showing how the floral rate in kerchiefs and caps changes across regions. Lines that stay high indicate consistent floral tradition; dips suggest regional departure. This is your strongest case study hook.</div>
+  <canvas id="slope-canvas" role="img" aria-label="Slope chart of floral rates for kerchiefs and caps across regions" style="display:block;width:100%"></canvas>
+  <div class="tableau-placeholder">
+    <div class="tp-label">Tableau import — section 07</div>
+    <div class="tp-title">Case study: kerchiefs &amp; caps slope chart</div>
+    <div class="tp-divider"><span>how to embed</span></div>
+    <div class="tp-instruction">
+      In Tableau Public, click <code>Share</code> → <code>Embed Code</code><br>
+      Paste the <code>&lt;script&gt;</code> tag here, replacing this block.<br>
+      Or drop an exported <code>.png</code> inside an <code>&lt;img&gt;</code> tag.
+    </div>
+  </div>
+</div>
+
+<div class="tooltip" id="TIP"></div>
+
+<script>
+const raw=[
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Bosnia-Herzegovina',g:"Man's",f:'no',geo:'yes',obj:'FEZ'},
+  {c:'Bosnia-Herzegovina',g:"Man's",f:'no',geo:'no',obj:'SKULLCAP'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'HEADSCARF'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'KERCHIEF'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'BLOUSE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'yes',geo:'yes',obj:'BLOUSE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Bosnia-Herzegovina',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Bosnia-Herzegovina',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON TIE'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON TIE'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'SHOE'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'SHOE'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'NECK RIBBON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'NECK RIBBON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'NECK BOW'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'CAP'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Croatia',g:"Man's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'SLEEVE; SLEEVELET'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'SLEEVE; SLEEVELET'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'DICKEY'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Croatia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Man's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Croatia',g:"Man's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Man's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Man's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Man's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Man's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'SLEEVE; SLEEVELET'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'SLEEVE; SLEEVELET'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Man's",f:'yes',geo:'yes',obj:'CAP'},
+  {c:'Macedonia',g:"Man's",f:'no',geo:'no',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'CHEMISE; SLEEVE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'SHOE'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'SHOE'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'WRISTLET'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'WRISTLET'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'no',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADSCARF'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADSCARF'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'CHIN STRAP'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'COLLAR'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'no',obj:'COLLAR'},
+  {c:'Macedonia',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Macedonia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Montenegro',g:"Woman's",f:'yes',geo:'yes',obj:'HAT'},
+  {c:'Montenegro',g:"Woman's",f:'yes',geo:'yes',obj:'HAT'},
+  {c:'Montenegro',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Montenegro',g:"Man's",f:'no',geo:'yes',obj:'HAT'},
+  {c:'Montenegro',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Montenegro',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Montenegro',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'BLOUSE; SLEEVE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'no',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'no',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADSCARF'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BAG'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'no',obj:'KERCHIEF'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'no',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SLEEVE; SLEEVELET'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SLEEVE; SLEEVELET'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'NECKLACE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'no',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BELT'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'HEADDRESS'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'TROUSER CUFF'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'TROUSER CUFF'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'TROUSER CUFF'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'TROUSER CUFF'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'BACK APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'TOE COVER'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'TOE COVER'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'CAP'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'no',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'no',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'yes',geo:'yes',obj:'STOCKING'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'TOE COVER'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'TOE COVER'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'HAT'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'HAT'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'yes',obj:'HAT'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SASH'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Man's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'no',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'SHOE'},
+  {c:'Serbia',g:"Woman's",f:'yes',geo:'yes',obj:'APRON'},
+  {c:'Serbia',g:"Woman's",f:'no',geo:'yes',obj:'APRON'},
+];
+
+const countries=['Bosnia-Herzegovina','Croatia','Macedonia','Serbia','Montenegro'];
+const shortName=c=>c==='Bosnia-Herzegovina'?'Bosnia-Herz.':c;
+const COLS={geo:'#1e5c8a',floral:'#7a3a8a',both:'#b8860b',neither:'#9a9080'};
+
+function motif(r){
+  if(r.f==='yes'&&r.geo==='yes') return 'both';
+  if(r.f==='yes') return 'floral';
+  if(r.geo==='yes') return 'geo';
+  return 'neither';
+}
+
+const TIP=document.getElementById('TIP');
+function tip(e,html){TIP.innerHTML=html;TIP.style.opacity='1';TIP.style.left=(e.clientX+14)+'px';TIP.style.top=(e.clientY-10)+'px'}
+function untip(){TIP.style.opacity='0'}
+
+// OVERVIEW STATS
+function buildOverview(){
+  const tot=raw.length;
+  const counts={geo:0,floral:0,both:0,neither:0};
+  raw.forEach(r=>counts[motif(r)]++);
+  const withGeo=counts.geo+counts.both;
+  const withFloral=counts.floral+counts.both;
+  document.getElementById('pct-geo').textContent=Math.round(withGeo/tot*100)+'%';
+  document.getElementById('pct-floral').textContent=Math.round(withFloral/tot*100)+'%';
+
+  const defs=[
+    {key:'geo',cls:'f-geo',label:'Geometric only',sub:`${counts.geo} items — includes either geometric but no floral motif`},
+    {key:'floral',cls:'f-floral',label:'Floral only',sub:`${counts.floral} items — floral motif present, no geometric`},
+    {key:'both',cls:'f-both',label:'Both motifs',sub:`${counts.both} items — floral and geometric combined`},
+    {key:'neither',cls:'f-n',label:'Neither',sub:`${counts.neither} items — no motif recorded`},
+  ];
+  const row=document.getElementById('finding-row');
+  defs.forEach(d=>{
+    const pct=Math.round(counts[d.key]/tot*100);
+    row.innerHTML+=`<div class="finding-card ${d.cls}">
+      <div class="fc-label">${d.label}</div>
+      <div class="fc-num" style="color:${COLS[d.key]}">${pct}%</div>
+      <div class="fc-sub">${d.sub}</div></div>`;
+  });
+
+  // proportional bar
+  const canvas=document.getElementById('overview-canvas');
+  const W=canvas.parentElement.offsetWidth||700;
+  canvas.width=W;canvas.height=52;
+  const ctx=canvas.getContext('2d');
+  let x=0;
+  ['geo','floral','both','neither'].forEach(k=>{
+    const w=Math.round(counts[k]/tot*W);
+    ctx.fillStyle=COLS[k];ctx.fillRect(x,8,w,28);
+    if(w>40){
+      ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 10px Space Mono, monospace';
+      ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(Math.round(counts[k]/tot*100)+'%',x+w/2,22);
+    }
+    x+=w;
+  });
+}
+
+// UNIT CHART
+function buildUnit(){
+  const grid=document.getElementById('unit-grid');
+  countries.forEach(country=>{
+    const items=raw.filter(r=>r.c===country);
+    const buckets={geo:[],floral:[],both:[],neither:[]};
+    items.forEach(r=>buckets[motif(r)].push(r));
+    const ordered=[...buckets.geo,...buckets.both,...buckets.floral,...buckets.neither];
+    const div=document.createElement('div');div.className='unit-country';
+    const pctF=Math.round((buckets.floral.length+buckets.both.length)/items.length*100);
+    const pctG=Math.round((buckets.geo.length+buckets.both.length)/items.length*100);
+    div.innerHTML=`<div class="uc-name">${country}</div>`;
+    const row=document.createElement('div');row.className='unit-row';
+    ordered.forEach(r=>{
+      const m=motif(r);
+      const sq=document.createElement('div');sq.className=`unit-sq ${m}`;
+      sq.onmouseenter=e=>tip(e,`${r.obj}<br>${r.g}<br><span style="color:${COLS[m]}">${m}</span>`);
+      sq.onmouseleave=untip;
+      row.appendChild(sq);
+    });
+    div.appendChild(row);
+    div.innerHTML+=`<div class="uc-stats">${items.length} items &nbsp;·&nbsp; <span style="color:${COLS.geo}">${pctG}% include geometric</span> &nbsp;·&nbsp; <span style="color:${COLS.floral}">${pctF}% include floral</span></div>`;
+    // re-attach row since innerHTML overwrote
+    div.insertBefore(row,div.querySelector('.uc-stats'));
+    grid.appendChild(div);
+  });
+}
+
+// SPLIT BARS
+function buildSplitBars(tableId, groups, labelWidth){
+  const table=document.getElementById(tableId);
+  groups.forEach(({label,items})=>{
+    const tot=items.length||1;
+    const counts={geo:0,floral:0,both:0,neither:0};
+    items.forEach(r=>counts[motif(r)]++);
+    const pctG=Math.round(counts.geo/tot*100);
+    const pctF=Math.round(counts.floral/tot*100);
+    const pctB=Math.round(counts.both/tot*100);
+    const pctN=Math.round(counts.neither/tot*100);
+    const row=document.createElement('tr');
+    row.innerHTML=`<td class="split-label" style="width:${labelWidth||120}px">${label}</td>
+      <td style="width:100%;padding:0.3rem 0.5rem">
+        <div style="display:flex;height:22px;gap:1px">
+          ${['geo','floral','both','neither'].map(k=>{
+            const p=counts[k]/tot*100;
+            return p<0.5?'':`<div style="flex:${p};background:${COLS[k]};cursor:default" 
+              onmouseenter="tip(event,'${label}<br>${k}: ${counts[k]} items (${Math.round(p)}%)')" 
+              onmouseleave="untip()"></div>`;
+          }).join('')}
+        </div>
+      </td>
+      <td style="font-family:Space Mono,monospace;font-size:0.58rem;color:var(--muted);white-space:nowrap;padding-left:8px">
+        <span style="color:${COLS.geo}">${pctG}% geo</span> &nbsp;
+        <span style="color:${COLS.floral}">${pctF}% floral</span>
+      </td>`;
+    table.appendChild(row);
+  });
+}
+
+// GENDER SLOPE
+function buildGenderSlope(){
+  const canvas=document.getElementById('gender-slope');
+  const W=Math.min(canvas.parentElement.offsetWidth,800);
+  canvas.width=W;canvas.height=320;
+  const ctx=canvas.getContext('2d');
+  const pad={l:120,r:120,t:40,b:40};
+  const iH=320-pad.t-pad.b,iW=W-pad.l-pad.r;
+  const xW=pad.l,xM=pad.l+iW*0.5,xM2=W-pad.r;
+
+  // axis labels
+  ctx.fillStyle=COLS.floral;ctx.font='italic 13px Cormorant Garamond,serif';
+  ctx.textAlign='center';
+  ctx.fillText("Women's — floral %",xW,pad.t-18);
+  ctx.fillStyle=COLS.geo;
+  ctx.fillText("Men's — floral %",xM2,pad.t-18);
+
+  // grid
+  [0,25,50,75,100].forEach(v=>{
+    const y=pad.t+iH*(1-v/100);
+    ctx.beginPath();ctx.moveTo(xW-4,y);ctx.lineTo(xW,y);
+    ctx.strokeStyle='#c4b89a';ctx.lineWidth=0.5;ctx.stroke();
+    ctx.fillStyle='#9a8a78';ctx.font='10px Space Mono,monospace';
+    ctx.textAlign='right';ctx.fillText(v+'%',xW-8,y+4);
+    ctx.beginPath();ctx.moveTo(xM2,y);ctx.lineTo(xM2+4,y);ctx.stroke();
+    ctx.textAlign='left';ctx.fillText(v+'%',xM2+8,y+4);
+  });
+  // axes
+  ctx.beginPath();ctx.moveTo(xW,pad.t);ctx.lineTo(xW,pad.t+iH);ctx.strokeStyle=COLS.floral;ctx.lineWidth=1.5;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(xM2,pad.t);ctx.lineTo(xM2,pad.t+iH);ctx.strokeStyle=COLS.geo;ctx.lineWidth=1.5;ctx.stroke();
+
+  const ccols=['#8a6a20','#2a7a5a','#8a3a50','#4a5a8a','#5a8a4a'];
+  countries.forEach((c,i)=>{
+    const wItems=raw.filter(r=>r.c===c&&r.g==="Woman's");
+    const mItems=raw.filter(r=>r.c===c&&r.g==="Man's");
+    if(!wItems.length&&!mItems.length) return;
+    const wF=wItems.length?wItems.filter(r=>r.f==='yes').length/wItems.length*100:0;
+    const mF=mItems.length?mItems.filter(r=>r.f==='yes').length/mItems.length*100:0;
+    const yW=pad.t+iH*(1-wF/100);
+    const yM=pad.t+iH*(1-mF/100);
+    const col=ccols[i];
+    ctx.beginPath();ctx.moveTo(xW,yW);ctx.lineTo(xM2,yM);
+    ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.setLineDash([]);ctx.stroke();
+    ctx.beginPath();ctx.arc(xW,yW,4,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+    ctx.beginPath();ctx.arc(xM2,yM,4,0,Math.PI*2);ctx.fill();
+    const sn=shortName(c);
+    ctx.font='11px Cormorant Garamond,serif';ctx.fillStyle=col;
+    ctx.textAlign='right';ctx.fillText(`${sn} ${Math.round(wF)}%`,xW-8,yW+4);
+    ctx.textAlign='left';ctx.fillText(`${sn} ${Math.round(mF)}%`,xM2+8,yM+4);
+  });
+}
+
+// HEATMAP
+function buildHeatmap(){
+  const objs=['APRON','STOCKING','SHOE','CAP','KERCHIEF','BELT','CHEMISE; SLEEVE','HEADDRESS','SASH'];
+  const matrix={};
+  countries.forEach(c=>{
+    matrix[c]={};
+    objs.forEach(o=>matrix[c][o]={total:0,floral:0,geo:0});
+  });
+  raw.forEach(r=>{
+    if(matrix[r.c]&&matrix[r.c][r.obj]!==undefined){
+      matrix[r.c][r.obj].total++;
+      if(r.f==='yes') matrix[r.c][r.obj].floral++;
+      if(r.geo==='yes') matrix[r.c][r.obj].geo++;
+    }
+  });
+  const short=s=>s.split(';')[0];
+  let h=`<table class="heat-table"><thead><tr><th></th>`;
+  objs.forEach(o=>h+=`<th>${short(o)}</th>`);
+  h+=`</tr></thead><tbody>`;
+  countries.forEach(c=>{
+    h+=`<tr><td class="rl">${shortName(c)}</td>`;
+    objs.forEach(o=>{
+      const d=matrix[c][o];
+      if(!d.total){h+=`<td></td>`;return}
+      const fp=d.floral/d.total;
+      const alpha=0.1+fp*0.85;
+      h+=`<td><div class="hc" style="background:rgba(122,58,138,${alpha.toFixed(2)})" 
+        onmouseenter="tip(event,'${c}<br>${o}<br>${d.total} items<br>${Math.round(fp*100)}% floral')" 
+        onmouseleave="untip()">
+        <span class="hn" style="color:${fp>0.4?'#f0e8f8':'var(--ink)'}">${d.total}</span>
+        <span class="hp" style="color:${fp>0.4?'#d4b8e0':'var(--muted)'}">${Math.round(fp*100)}%</span>
+      </div></td>`;
+    });
+    h+=`</tr>`;
+  });
+  h+=`</tbody></table>`;
+  document.getElementById('heatmap-wrap').innerHTML=h;
+}
+
+// SCATTER
+function buildScatter(){
+  const canvas=document.getElementById('scatter-canvas');
+  const W=Math.min(canvas.parentElement.offsetWidth,720);
+  canvas.width=W;canvas.height=360;
+  canvas.style.maxWidth=W+'px';
+  const ctx=canvas.getContext('2d');
+  const pad={l:60,r:40,t:40,b:60};
+  const iW=W-pad.l-pad.r,iH=360-pad.t-pad.b;
+
+  // axes
+  [0,25,50,75].forEach(v=>{
+    const x=pad.l+iW*(v/100),y=pad.t+iH*(1-v/100);
+    ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+iH);ctx.strokeStyle='#e0d8c8';ctx.lineWidth=0.5;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+iW,y);ctx.stroke();
+    ctx.fillStyle='#9a8a78';ctx.font='10px Space Mono,monospace';
+    ctx.textAlign='center';ctx.fillText(v+'%',x,pad.t+iH+18);
+    ctx.textAlign='right';ctx.fillText(v+'%',pad.l-8,y+4);
+  });
+  ctx.fillStyle='#9a8a78';ctx.font='italic 12px Cormorant Garamond,serif';
+  ctx.textAlign='center';ctx.fillText('Geometric-only rate →',pad.l+iW/2,pad.t+iH+36);
+  ctx.save();ctx.translate(18,pad.t+iH/2);ctx.rotate(-Math.PI/2);
+  ctx.fillText('← Floral-only rate',0,0);ctx.restore();
+
+  const maxItems=Math.max(...countries.map(c=>raw.filter(r=>r.c===c).length));
+  const ccols=['#8a6a20','#2a7a5a','#8a3a50','#4a5a8a','#5a8a4a'];
+  countries.forEach((c,i)=>{
+    const items=raw.filter(r=>r.c===c);
+    const tot=items.length||1;
+    const gOnly=items.filter(r=>r.geo==='yes'&&r.f==='no').length/tot*100;
+    const fOnly=items.filter(r=>r.f==='yes'&&r.geo==='no').length/tot*100;
+    const x=pad.l+iW*(gOnly/100);
+    const y=pad.t+iH*(1-fOnly/100);
+    const r=8+Math.sqrt(items.length/maxItems)*30;
+    ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+    ctx.fillStyle=ccols[i]+'66';ctx.fill();
+    ctx.strokeStyle=ccols[i];ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle=ccols[i];ctx.font='bold 11px Cormorant Garamond,serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(shortName(c),x,y-2);
+    ctx.font='9px Space Mono,monospace';
+    ctx.fillText(items.length+' items',x,y+10);
+    ctx.textBaseline='alphabetic';
+  });
+}
+
+// SLOPE: floral rate for kerchiefs and caps
+function buildCaseSlope(){
+  const canvas=document.getElementById('slope-canvas');
+  const W=Math.min(canvas.parentElement.offsetWidth,800);
+  canvas.width=W;canvas.height=340;
+  const ctx=canvas.getContext('2d');
+  const targets=['KERCHIEF','CAP'];
+  const colors=[COLS.floral,COLS.geo];
+  const pad={l:130,r:130,t:50,b:40};
+  const iH=340-pad.t-pad.b;
+  const slots=targets.length+1;
+  const xPositions=targets.map((_,i)=>pad.l+(W-pad.l-pad.r)*(i/(targets.length-1)));
+
+  // column headers
+  targets.forEach((t,i)=>{
+    ctx.fillStyle=colors[i];ctx.font='bold 13px Cormorant Garamond,serif';
+    ctx.textAlign='center';
+    ctx.fillText(`${t} — floral %`,xPositions[i],pad.t-22);
+  });
+
+  // grid
+  [0,25,50,75,100].forEach(v=>{
+    targets.forEach((t,i)=>{
+      const x=xPositions[i],y=pad.t+iH*(1-v/100);
+      ctx.beginPath();ctx.moveTo(x-4,y);ctx.lineTo(x,y);
+      ctx.strokeStyle='#c4b89a';ctx.lineWidth=0.5;ctx.stroke();
+      ctx.fillStyle='#9a8a78';ctx.font='10px Space Mono,monospace';
+      if(i===0){ctx.textAlign='right';ctx.fillText(v+'%',x-8,y+4)}
+      if(i===targets.length-1){ctx.textAlign='left';ctx.fillText(v+'%',x+8,y+4)}
+    });
+  });
+  // axes
+  targets.forEach((t,i)=>{
+    const x=xPositions[i];
+    ctx.beginPath();ctx.moveTo(x,pad.t);ctx.lineTo(x,pad.t+iH);
+    ctx.strokeStyle=colors[i];ctx.lineWidth=1.5;ctx.stroke();
+  });
+
+  const ccols=['#8a6a20','#2a7a5a','#8a3a50','#4a5a8a','#5a8a4a'];
+  countries.forEach((c,ci)=>{
+    const rates=targets.map(obj=>{
+      const items=raw.filter(r=>r.c===c&&r.obj===obj);
+      return items.length?items.filter(r=>r.f==='yes').length/items.length*100:null;
+    });
+    if(rates.every(r=>r===null)) return;
+    const col=ccols[ci];
+    // draw line between valid points
+    let lastX=null,lastY=null;
+    rates.forEach((rate,i)=>{
+      if(rate===null) return;
+      const x=xPositions[i],y=pad.t+iH*(1-rate/100);
+      if(lastX!==null){
+        ctx.beginPath();ctx.moveTo(lastX,lastY);ctx.lineTo(x,y);
+        ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle=col;ctx.fill();
+      const sn=shortName(c);
+      ctx.font='11px Cormorant Garamond,serif';ctx.fillStyle=col;
+      if(i===0){ctx.textAlign='right';ctx.fillText(`${sn} ${Math.round(rate)}%`,x-10,y+4)}
+      else{ctx.textAlign='left';ctx.fillText(`${sn} ${Math.round(rate)}%`,x+10,y+4)}
+      lastX=x;lastY=y;
+    });
+  });
+}
+
+buildOverview();
+buildUnit();
+buildSplitBars('split-table',countries.map(c=>({label:shortName(c),items:raw.filter(r=>r.c===c)})),110);
+buildSplitBars('gender-table',["Woman's","Man's"].map(g=>({label:g,items:raw.filter(r=>r.g===g)})),80);
+buildGenderSlope();
+buildHeatmap();
+buildScatter();
+buildCaseSlope();
+</script>
+</body>
+</html>
