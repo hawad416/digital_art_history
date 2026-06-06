@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thread 1: Regional Granularity — Yugoslav Textiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1410;--paper:#f7f2e8;
+  --floral:#7a3a8a;--floral-light:#c49ad4;--floral-dim:#e8d8f2;
+  --geo:#1e5c8a;--geo-light:#6aaed4;--geo-dim:#d0e6f4;
+  --both:#b8860b;--both-light:#e8c84a;
+  --neither:#9a9080;--muted:#7a6a58;--rule:#d4c8b0;
+}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+.masthead{border-bottom:2px solid var(--ink);padding:2rem 4rem 1.25rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem}
+.masthead-back{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;transition:color 0.2s}
+.masthead-back:hover{color:var(--ink)}
+.masthead h1{font-size:2.2rem;font-weight:300;line-height:1.15;letter-spacing:-0.02em}
+.masthead-sub{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted);text-align:right;line-height:2}
+.thread-banner{background:var(--geo);color:#fff;padding:1rem 4rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.thread-banner-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7}
+.thread-banner-title{font-size:1rem;font-weight:300;font-style:italic;opacity:0.9}
+.section{padding:3rem 4rem;border-bottom:1px solid var(--rule);animation:fadeUp 0.4s ease both}
+.section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem}
+.section-title{font-size:1.8rem;font-weight:300;margin-bottom:0.5rem}
+.section-desc{font-size:1.1rem;color:var(--muted);font-style:italic;line-height:1.7;max-width:640px;margin-bottom:2rem}
+.prose{font-size:1.2rem;line-height:1.9;max-width:760px;margin-bottom:1.5rem}
+.legend{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:0.5rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.04em}
+.leg-swatch{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+.bar-block{margin-bottom:2rem}
+.bar-region-name{font-size:1.1rem;font-weight:500;margin-bottom:2px}
+.bar-region-sub{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.06em;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
+.bar-row{display:flex;height:28px;width:100%;overflow:hidden;border-radius:2px}
+.bar-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:0.58rem;overflow:hidden;white-space:nowrap;transition:opacity 0.2s;cursor:default}
+.bar-seg:hover{opacity:0.75}
+.bar-note{font-size:0.8rem;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.6}
+.callout-row{display:flex;gap:3rem;margin-bottom:2rem;flex-wrap:wrap}
+.callout{border-left:3px solid var(--rule);padding-left:1.25rem}
+.callout .num{font-size:3rem;font-weight:300;line-height:1}
+.callout .lbl{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.callout .sub{font-size:0.82rem;color:var(--muted);font-style:italic;margin-top:4px}
+.insight{background:var(--ink);color:var(--paper);padding:1.5rem 2rem;margin-top:2rem}
+.insight-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a8c78;margin-bottom:0.5rem}
+.insight p{font-size:0.92rem;font-style:italic;color:#d4c8b0;line-height:1.8}
+.insight strong{color:var(--paper);font-style:normal;font-weight:500}
+.method-box{border:1px solid var(--rule);padding:1.25rem 1.5rem;margin-top:2rem;background:rgba(255,255,255,0.4)}
+.method-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem}
+.method-box p{font-size:0.82rem;color:var(--muted);font-style:italic;line-height:1.7}
+.country-header{display:flex;align-items:center;gap:1.5rem;padding:1.5rem 0 1rem;border-top:1px solid var(--rule);margin-top:2rem;flex-wrap:wrap}
+.country-name{font-size:1.5rem;font-weight:300;font-style:italic}
+.country-badge{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);background:rgba(0,0,0,0.05);padding:4px 10px;border-radius:2px;text-transform:uppercase}
+.country-flag{font-size:1.1rem;color:var(--muted);font-style:italic;max-width:640px;line-height:1.7}
+.obj-row{display:grid;grid-template-columns:150px 1fr 52px;align-items:center;gap:0.75rem;margin-bottom:10px}
+.obj-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;color:var(--muted);text-align:right;text-transform:uppercase}
+.obj-bar-wrap{position:relative;height:24px}
+.obj-bar-fill{height:100%;border-radius:2px}
+.obj-bar-n{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted)}
+.tooltip{position:fixed;background:var(--ink);color:var(--paper);padding:0.5rem 0.9rem;font-size:0.72rem;font-family:'Space Mono',monospace;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;border-left:3px solid var(--geo);max-width:220px;line-height:1.6}
+.bottom-nav{border-top:2px solid var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.bottom-nav a{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.bottom-nav a:hover{color:var(--ink)}
+
+.paper-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:3rem;max-width:1600px;margin:0 auto}
+.paper-nav{position:sticky;top:2rem;align-self:start;padding-left:2rem}
+.paper-nav-title{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.paper-nav a{display:block;color:var(--muted);text-decoration:none;margin-bottom:0.75rem;font-size:0.9rem;transition:all 0.2s ease}
+.paper-nav a:hover{color:var(--ink);transform:translateX(4px)}
+.paper-content{min-width:0}
+
+@media (max-width:1100px){
+  .paper-layout{grid-template-columns:1fr}
+  .paper-nav{position:relative;top:auto;padding-left:0;margin-bottom:2rem}
+  .masthead{padding:1.5rem 1.5rem 1rem}
+  .section{padding:2rem 1.5rem}
+  .thread-banner{padding:1rem 1.5rem}
+  .bottom-nav{padding:1.5rem}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <a href="index.html" class="masthead-back">&#8592; Back to Main Research</a>
+    <h1>Thread 1: Regional Granularity<br><span style="color:var(--geo);font-style:italic">Sub-regional motif variation within Yugoslavia</span></h1>
+  </div>
+  <div class="masthead-sub">
+    Henry Art Gallery &middot; Eastern European Art<br>
+    ART H 209: Digital Art History<br>
+    Tatev, Jewel, Joseph, Hawa, Sophia, Charlie
+  </div>
+</div>
+
+<div class="thread-banner">
+  <div>
+    <div class="thread-banner-label">Further Inquiry &mdash; Thread 1</div>
+    <div class="thread-banner-title">Within a single country, do city-level floral patterns reflect distinct cultural histories?</div>
+  </div>
+</div>
+
+<div class="paper-layout">
+
+  <aside class="paper-nav">
+    <div class="paper-nav-title">Contents</div>
+    <a href="index.html" style="color:var(--muted)">&#8592; Main Research</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Thread 1</div>
+    <a href="#t1-overview" style="padding-left:0.75rem">Overview</a>
+    <a href="#t1-croatia" style="padding-left:0.75rem">Croatia</a>
+    <a href="#t1-serbia" style="padding-left:0.75rem">Serbia</a>
+    <a href="#t1-macedonia" style="padding-left:0.75rem">Macedonia</a>
+    <a href="#t1-apron" style="padding-left:0.75rem">Same Garment, Different Region</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Other Pages</div>
+    <a href="thread2.html" style="padding-left:0.75rem;color:var(--floral)">Thread 2: Object Types ↗</a>
+  </aside>
+
+  <div class="paper-content">
+
+  <div id="t1-overview" class="section">
+    <div class="section-label" style="color:var(--geo)">Thread 1: Regional Granularity (EDITING STILL)</div>
+    <div class="section-title">Within a single country, do city-level floral patterns reflect distinct cultural histories?</div>
+    <div class="section-desc">The central finding in Thread 1 is that country-level data masks enormous variation. Two regions within the same country can look completely opposite in their motif composition. These splits map closely onto historical boundaries, Habsburg vs. Venetian influence in Croatia, Ottoman vs. Serbian heartland in Serbia, supporting what the Blanche Payne archive documents directly: <em>&ldquo;People identified mostly with their historic regions or lands until the nineteenth century, when the development of capitalism and integration processes caused the birth of modern national identities.&rdquo;</em></div>
+
+    <p class="country-flag" style="max-width:720px;margin-bottom:2rem">A key factor shaping these regional differences was centuries of different imperial rule. Until World War I, Austria-Hungary governed present-day Slovenia, Croatia, and Bosnia and Herzegovina, while the Ottoman Empire held Serbia and Montenegro until 1878 and Macedonia as late as 1912.<sup>1</sup> These separate political spheres produced distinct cultural traditions that outlasted the empires themselves. Even after these populations were brought under a single Yugoslav government during Payne&apos;s research trips in the 1930s, the archive notes they &ldquo;kept their cultural traditions alive through a revived interest in dance and costume&rdquo;<sup>1</sup> and textile motifs continued to differ sharply from region to region. Our data reflects exactly this: the same country can contain regions that look completely opposite in their motif composition, because they were never culturally unified to begin with. <span style="font-size:0.78rem;color:var(--muted)"><sup>1</sup> Blanche Payne Regional Costume Photograph and Drawing Collection, Archives West, Historical Background and Yugoslav Regional Costume sections.</span></p>
+
+    <div class="callout-row">
+      <div class="callout"><div class="num" style="color:var(--floral)">80%</div><div class="lbl">Posavina floral rate</div><div class="sub">vs 15% in Dalmatia (same country)</div></div>
+      <div class="callout"><div class="num" style="color:var(--geo)">65 pts</div><div class="lbl">Gap within Croatia</div><div class="sub">largest regional split in the dataset</div></div>
+      <div class="callout"><div class="num" style="color:var(--both)">46%</div><div class="lbl">Sumadija floral rate</div><div class="sub">vs 18% in Kosovo &mdash; same country</div></div>
+    </div>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Floral only</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--both)"></div>Both floral + geometric</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--geo)"></div>Geometric only</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--neither)"></div>Neither classified</div>
+    </div>
+
+    <div id="t1-croatia" class="country-header" style="border-top:none;margin-top:0;padding-top:0">
+      <span class="country-name">Croatia</span>
+      <span class="country-badge">167 items &middot; 5 regions analyzed</span>
+    </div>
+    <p class="country-flag">Posavina (inland, Sava River valley) fell under Habsburg rule, while Dalmatia (Adriatic coast) was shaped by centuries of Venetian and Mediterranean contact. These two regions sit at the extreme ends of every motif comparison in the dataset. Baranja and Slavonski Brod sit in between, as does Zagreb-Sestine, reflecting mixed cultural influences.</p>
+    <p class="country-flag" style="margin-top:0.75rem">The archive notes broadly that interaction with other countries shaped &ldquo;costume production, materials and motifs&rdquo;<sup>1</sup> across Yugoslavia. In Croatia, that interaction produced two almost entirely different textile traditions within a single modern country. The 65 percentage point gap between Posavina and Dalmatia is, we would argue, a direct reflection of that history. <span style="font-size:0.78rem;color:var(--muted)"><sup>1</sup> Blanche Payne Regional Costume Photograph and Drawing Collection, Archives West &mdash; Yugoslav Regional Costume section.</span></p>
+    <div style="margin-top:1.5rem" id="croatia-bars"></div>
+    <div class="insight">
+      <div class="insight-label">Reading the Croatia data</div>
+      <p>Posavina&apos;s 80% floral rate is not driven by one garment type. Kerchiefs are 90% floral, caps 65%, aprons 80%, belts 78%. <strong>Floral is the consistent aesthetic across every garment in Posavina.</strong> Dalmatia&apos;s 15% rate is equally consistent in the opposite direction. All 61 Posavina items are women&apos;s garments; Dalmatia includes 11 men&apos;s items (9% floral).</p>
+    </div>
+
+    <div id="t1-serbia" class="country-header">
+      <span class="country-name">Serbia</span>
+      <span class="country-badge">111 items &middot; Kosovo and Sumadija analyzed</span>
+    </div>
+    <p class="country-flag">Kosovo-Metohije and Sumadija share a country but not a history. The archive documents that the Ottoman Empire held Serbia and Montenegro until 1878, while Kosovo remained under Ottoman control until 1912<sup>1</sup> meaning these two Serbian regions had significantly different histories of outside cultural influence. Meanwhile, the archive describes a 19th-century resurgence of interest in regional dress that &ldquo;coincided with a romanticized and idealized idea of the peasant past, which culminated in the idea of &lsquo;our dress,&rsquo; emblematic of national identity.&rdquo;<sup>1</sup> Sumadija, as a center of Serbian cultural identity, likely concentrated that revival more intensely than border regions with more complex political histories. Our data shows the result: Kosovo-Metohije at 18% floral, Sumadija at 46%. Blanche Payne collected during King Alexander&apos;s dictatorship (her 1930 trip) and its turbulent aftermath (1936&ndash;37). <span style="font-size:0.78rem;color:var(--muted)"><sup>1</sup> Blanche Payne Regional Costume Photograph and Drawing Collection, Archives West, Historical Background section.</span></p>
+    <div style="margin-top:1.5rem" id="serbia-bars"></div>
+    <div class="insight">
+      <div class="insight-label">The Serbia anomaly: men&apos;s stockings</div>
+      <p>Sumadija&apos;s high floral rate (46%) is almost entirely driven by its 12 stockings, every one 100% floral. Kosovo has zero men&apos;s items in the dataset. <strong>Just because the Henry holds 12 elaborately embroidered Sumadija stockings does not mean all Serbian men wore floral stockings</strong> &mdash; these were likely festival pieces that caught a collector&apos;s eye. This is the curatorial argument: what Blanche chose to collect shapes every finding we can make.</p>
+    </div>
+
+    <div id="t1-macedonia" class="country-header">
+      <span class="country-name">Macedonia</span>
+      <span class="country-badge">178 items &middot; 7 regions analyzed</span>
+    </div>
+    <p class="country-flag">Macedonia was under Ottoman rule until 1912 which was far later than Croatia or northern Serbia. We believe its textile tradition reflects that: the collection is predominantly geometric across all regions. Sub-regional variation exists, with Mariovo and Pelagonija Bitola reaching 40&ndash;45% floral, while Pelagonija Bitola-Prilep sits at 12%. Note: Gostivar&apos;s 14 items are all stockings &mdash; its rate reflects one garment type, not a regional aesthetic.</p>
+    <div style="margin-top:1.5rem" id="macedonia-bars"></div>
+    <div class="insight">
+      <div class="insight-label">Macedonia&apos;s complexity</div>
+      <p>Unlike Croatia, Macedonia does not have a clean high/low split. Most regions sit between 12&ndash;45% floral with heavy geometric dominance throughout. <strong>The more interesting story in Macedonia is what is absent:</strong> the Henry has almost no men&apos;s items from Macedonia outside of Gostivar stockings. Whether this reflects Blanche&apos;s access, the nature of male dress in the region, or curatorial selection is an open question this dataset cannot answer.</p>
+    </div>
+
+    <div id="t1-apron" class="country-header">
+      <span class="country-name">Same garment, different region</span>
+      <span class="country-badge">Apron floral rate across regions</span>
+    </div>
+    <p class="country-flag" style="margin-bottom:1.5rem">The apron is the most common garment type (n=94). Comparing its floral rate across regions reveals that region predicts motif more powerfully than garment type. The same item looks completely different depending on where it came from.</p>
+    <div id="apron-cross"></div>
+
+    <div class="method-box">
+      <div class="method-label">Methodology &amp; exclusions</div>
+      <p>All bars show the 500 classified rows only. &ldquo;Floral inclusion rate&rdquo; counts any item where floral = yes, including items tagged both floral and geometric. Regions with fewer than 10 items are excluded from main visualizations. Bosnia-Herzegovina (n=29 total, largest sub-region n=7) is not analyzed at the regional level.</p>
+    </div>
+  </div>
+
+  </div><!-- /paper-content -->
+</div><!-- /paper-layout -->
+
+<div class="bottom-nav">
+  <a href="index.html">&#8592; Back to Main Research</a>
+  <a href="thread2.html">Thread 2: Object Type Patterns &#8594;</a>
+</div>
+
+<div class="tooltip" id="TIP"></div>
+
+<script>
+const TIP = document.getElementById('TIP');
+function tip(e, html) { TIP.innerHTML = html; TIP.style.opacity = '1'; TIP.style.left = (e.clientX+14)+'px'; TIP.style.top = (e.clientY-10)+'px'; }
+function untip() { TIP.style.opacity = '0'; }
+
+const COLS = { floral:'#7a3a8a', both:'#b8860b', geo:'#1e5c8a', neither:'#9a9080' };
+const MOTIFS = ['floral','both','geo','neither'];
+
+function buildPropBar(containerId, regions) {
+  var wrap = document.getElementById(containerId);
+  regions.forEach(function(r) {
+    var t = r.n;
+    var block = document.createElement('div');
+    block.className = 'bar-block';
+    var segs = MOTIFS.map(function(m) {
+      var count=r[m]||0; var pct=count/t*100;
+      if(pct<0.5) return '';
+      var label=pct>8?Math.round(pct)+'%':'';
+      var tc=m==='both'?'#5a3a00':'#fff';
+      return '<div class="bar-seg" style="flex:'+pct.toFixed(2)+';background:'+COLS[m]+';color:'+tc+'" onmouseenter="tip(event,\'<strong>'+r.name+'</strong><br>'+m+': '+count+' items ('+Math.round(pct)+'%)\')" onmouseleave="untip()">'+label+'</div>';
+    }).join('');
+    block.innerHTML = '<div class="bar-region-name">'+r.name+' <span style="font-size:0.75rem;font-weight:300;color:var(--muted)">n = '+r.n+'</span></div>'+(r.sub?'<div class="bar-region-sub">'+r.sub+'</div>':'')+
+      '<div class="bar-row">'+segs+'</div>'+
+      '<div class="bar-note">Floral inclusion rate: <strong>'+r.floral_inc+'%</strong>'+(r.note?' &middot; '+r.note:'')+'</div>';
+    wrap.appendChild(block);
+  });
+}
+
+buildPropBar('croatia-bars', [
+  {name:'Posavina',sub:'SAVA RIVER VALLEY -- HABSBURG INFLUENCE',n:61,floral:31,both:18,geo:11,neither:1,floral_inc:80,note:'All 61 items are women\'s garments'},
+  {name:'Baranja',sub:'NORTHERN CROATIA -- MIXED INFLUENCES',n:24,floral:1,both:7,geo:16,neither:0,floral_inc:33},
+  {name:'Slavonia, Slavonski Brod',sub:'EASTERN CROATIA -- PANNONIAN LOWLANDS',n:10,floral:1,both:1,geo:8,neither:0,floral_inc:20},
+  {name:'Zagreb, Sestine',sub:'ZAGREB SUBURB -- MIXED INFLUENCES',n:10,floral:2,both:1,geo:5,neither:2,floral_inc:30},
+  {name:'Dalmatia',sub:'ADRIATIC COAST -- VENETIAN / MEDITERRANEAN INFLUENCE',n:40,floral:0,both:6,geo:30,neither:4,floral_inc:15,note:'Includes 11 men\'s items (9% floral)'},
+]);
+
+buildPropBar('serbia-bars', [
+  {name:'Sumadija',sub:'CENTRAL SERBIA -- HEARTLAND OF SERBIAN NATIONAL IDENTITY',n:39,floral:6,both:12,geo:12,neither:9,floral_inc:46,note:'12 of 39 items are men\'s stockings -- all 100% floral'},
+  {name:'Kosovo-Metohije',sub:'SOUTHERN SERBIA -- OTTOMAN INFLUENCE UNTIL 1912',n:44,floral:3,both:5,geo:36,neither:0,floral_inc:18,note:'Zero men\'s items in the dataset from this region'},
+]);
+
+buildPropBar('macedonia-bars', [
+  {name:'Mariovo',sub:'SOUTH-CENTRAL MACEDONIA',n:12,floral:0,both:5,geo:6,neither:1,floral_inc:42},
+  {name:'Pelagonija, Bitola',sub:'SOUTHWESTERN MACEDONIA',n:11,floral:2,both:3,geo:5,neither:1,floral_inc:45},
+  {name:'Bigla, Smilevo',sub:'CENTRAL MACEDONIA',n:10,floral:1,both:3,geo:5,neither:1,floral_inc:40},
+  {name:'Vardar, Skopska Crna Gora',sub:'NORTH-CENTRAL MACEDONIA',n:14,floral:3,both:2,geo:9,neither:0,floral_inc:36},
+  {name:'Debar, Galicnik',sub:'WESTERN MACEDONIA',n:11,floral:2,both:1,geo:7,neither:1,floral_inc:27},
+  {name:'Gostivar',sub:'NORTHWESTERN MACEDONIA -- ALL 14 ITEMS ARE STOCKINGS',n:14,floral:0,both:4,geo:10,neither:0,floral_inc:29,note:'All 14 items are stockings -- reflects one garment type only'},
+  {name:'Pelagonija, Bitola-Prilep',sub:'SOUTHWESTERN MACEDONIA',n:25,floral:0,both:3,geo:20,neither:2,floral_inc:12},
+]);
+
+function buildApronCross() {
+  var rows = [
+    {label:'Posavina (Croatia)',n:10,fi:80},
+    {label:'Sumadija (Serbia)',n:3,fi:67,small:true},
+    {label:'Baranja (Croatia)',n:8,fi:38},
+    {label:'Pelagonija, Bitola (Mac.)',n:4,fi:50,small:true},
+    {label:'Dalmatia (Croatia)',n:5,fi:20,small:true},
+    {label:'Kosovo-Metohije (Serbia)',n:14,fi:21},
+    {label:'Debar / Smilevo (Mac.)',n:4,fi:25,small:true},
+    {label:'Pelagonija B-P (Mac.)',n:3,fi:0,small:true},
+    {label:'Macedonia Unspecified',n:5,fi:0,small:true},
+  ];
+  var html = '<p style="font-family:Space Mono,monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem">Apron -- floral inclusion rate by region</p>';
+  rows.forEach(function(r) {
+    var sf = r.small ? ' <span style="font-size:0.68rem;color:var(--muted);font-style:italic">small sample (n='+r.n+')</span>' : ' <span style="font-size:0.68rem;color:var(--muted)">n='+r.n+'</span>';
+    var col = r.fi>50?'var(--floral)':r.fi>20?'var(--both)':'var(--geo)';
+    html += '<div class="obj-row"><div class="obj-label">'+r.label+'</div><div class="obj-bar-wrap"><div class="obj-bar-fill" style="width:'+r.fi+'%;background:'+col+';height:22px"></div></div><div class="obj-bar-n">'+r.fi+'%'+sf+'</div></div>';
+  });
+  html += '<p style="font-size:0.78rem;color:var(--muted);font-style:italic;margin-top:0.75rem">Same garment. Same classification system. Posavina aprons: 80% floral. Macedonia Bitola-Prilep aprons: 0% floral.</p>';
+  document.getElementById('apron-cross').innerHTML = html;
+}
+buildApronCross();
+</script>
+</body>
+</html>

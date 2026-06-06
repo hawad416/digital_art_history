@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thread 2: Object Type Patterns — Yugoslav Textiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1410;--paper:#f7f2e8;
+  --floral:#7a3a8a;--floral-light:#c49ad4;--floral-dim:#e8d8f2;
+  --geo:#1e5c8a;--geo-light:#6aaed4;--geo-dim:#d0e6f4;
+  --both:#b8860b;--both-light:#e8c84a;
+  --neither:#9a9080;--muted:#7a6a58;--rule:#d4c8b0;
+}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+.masthead{border-bottom:2px solid var(--ink);padding:2rem 4rem 1.25rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem}
+.masthead-back{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;transition:color 0.2s}
+.masthead-back:hover{color:var(--ink)}
+.masthead h1{font-size:2.2rem;font-weight:300;line-height:1.15;letter-spacing:-0.02em}
+.masthead-sub{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted);text-align:right;line-height:2}
+.thread-banner{background:var(--floral);color:#fff;padding:1rem 4rem;display:flex;gap:2rem;align-items:center;flex-wrap:wrap}
+.thread-banner-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;opacity:0.7}
+.thread-banner-title{font-size:1rem;font-weight:300;font-style:italic;opacity:0.9}
+.section{padding:3rem 4rem;border-bottom:1px solid var(--rule);animation:fadeUp 0.4s ease both}
+.section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem}
+.section-title{font-size:1.8rem;font-weight:300;margin-bottom:0.5rem}
+.section-desc{font-size:1.1rem;color:var(--muted);font-style:italic;line-height:1.7;max-width:640px;margin-bottom:2rem}
+.prose{font-size:1.2rem;line-height:1.9;max-width:760px;margin-bottom:1.5rem}
+.legend{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:0.5rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.04em}
+.leg-swatch{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+.bar-block{margin-bottom:2rem}
+.bar-region-name{font-size:1.1rem;font-weight:500;margin-bottom:2px}
+.bar-row{display:flex;height:28px;width:100%;overflow:hidden;border-radius:2px}
+.bar-seg{height:100%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:0.58rem;overflow:hidden;white-space:nowrap;transition:opacity 0.2s;cursor:default}
+.bar-seg:hover{opacity:0.75}
+.bar-note{font-size:0.8rem;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.6}
+.callout-row{display:flex;gap:3rem;margin-bottom:2rem;flex-wrap:wrap}
+.callout{border-left:3px solid var(--rule);padding-left:1.25rem}
+.callout .num{font-size:3rem;font-weight:300;line-height:1}
+.callout .lbl{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.callout .sub{font-size:0.82rem;color:var(--muted);font-style:italic;margin-top:4px}
+.insight{background:var(--ink);color:var(--paper);padding:1.5rem 2rem;margin-top:2rem}
+.insight-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a8c78;margin-bottom:0.5rem}
+.insight p{font-size:0.92rem;font-style:italic;color:#d4c8b0;line-height:1.8}
+.insight strong{color:var(--paper);font-style:normal;font-weight:500}
+.method-box{border:1px solid var(--rule);padding:1.25rem 1.5rem;margin-top:2rem;background:rgba(255,255,255,0.4)}
+.method-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem}
+.method-box p{font-size:0.82rem;color:var(--muted);font-style:italic;line-height:1.7}
+.country-header{display:flex;align-items:center;gap:1.5rem;padding:1.5rem 0 1rem;border-top:1px solid var(--rule);margin-top:2rem;flex-wrap:wrap}
+.country-name{font-size:1.5rem;font-weight:300;font-style:italic}
+.country-badge{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);background:rgba(0,0,0,0.05);padding:4px 10px;border-radius:2px;text-transform:uppercase}
+.country-flag{font-size:1.1rem;color:var(--muted);font-style:italic;max-width:640px;line-height:1.7}
+.obj-row{display:grid;grid-template-columns:150px 1fr 52px;align-items:center;gap:0.75rem;margin-bottom:10px}
+.obj-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;color:var(--muted);text-align:right;text-transform:uppercase}
+.obj-bar-wrap{position:relative;height:24px}
+.obj-bar-fill{height:100%;border-radius:2px}
+.obj-bar-n{font-family:'Space Mono',monospace;font-size:0.58rem;color:var(--muted)}
+.heat-wrap{overflow-x:auto;margin-top:1.5rem}
+.heat-table{border-collapse:collapse;font-family:'Space Mono',monospace;font-size:0.6rem;min-width:600px}
+.heat-table th{padding:0.5rem 0.6rem;color:var(--muted);font-weight:400;letter-spacing:0.05em;text-align:center;border-bottom:1px solid var(--rule);font-size:0.58rem;white-space:nowrap}
+.heat-table td{padding:0.35rem 0.6rem;text-align:center;vertical-align:middle}
+.heat-table .rl{text-align:left;color:var(--muted);font-size:0.62rem;padding-right:1rem;white-space:nowrap;font-weight:400}
+.hc{border-radius:2px;padding:0.3rem 0.4rem;display:inline-block;min-width:48px;text-align:center;cursor:default}
+.hc .hn{font-size:0.82rem;font-family:'Cormorant Garamond',serif;display:block;font-weight:500}
+.hc .hp{font-size:0.52rem;opacity:0.75;display:block}
+.tooltip{position:fixed;background:var(--ink);color:var(--paper);padding:0.5rem 0.9rem;font-size:0.72rem;font-family:'Space Mono',monospace;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;border-left:3px solid var(--floral);max-width:220px;line-height:1.6}
+.bottom-nav{border-top:2px solid var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.bottom-nav a{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.bottom-nav a:hover{color:var(--ink)}
+
+.paper-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:3rem;max-width:1600px;margin:0 auto}
+.paper-nav{position:sticky;top:2rem;align-self:start;padding-left:2rem}
+.paper-nav-title{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.paper-nav a{display:block;color:var(--muted);text-decoration:none;margin-bottom:0.75rem;font-size:0.9rem;transition:all 0.2s ease}
+.paper-nav a:hover{color:var(--ink);transform:translateX(4px)}
+.paper-content{min-width:0}
+
+@media (max-width:1100px){
+  .paper-layout{grid-template-columns:1fr}
+  .paper-nav{position:relative;top:auto;padding-left:0;margin-bottom:2rem}
+  .masthead{padding:1.5rem 1.5rem 1rem}
+  .section{padding:2rem 1.5rem}
+  .thread-banner{padding:1rem 1.5rem}
+  .bottom-nav{padding:1.5rem}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <a href="index.html" class="masthead-back">&#8592; Back to Main Research</a>
+    <h1>Thread 2: Object Type Patterns<br><span style="color:var(--floral);font-style:italic">Does garment function predict motif?</span></h1>
+  </div>
+  <div class="masthead-sub">
+    Henry Art Gallery &middot; Eastern European Art<br>
+    ART H 209: Digital Art History<br>
+    Tatev, Jewel, Joseph, Hawa, Sophia, Charlie
+  </div>
+</div>
+
+<div class="thread-banner">
+  <div>
+    <div class="thread-banner-label">Further Inquiry &mdash; Thread 2</div>
+    <div class="thread-banner-title">Does garment type predict floral motif more strongly than country or gender?</div>
+  </div>
+</div>
+
+<div class="paper-layout">
+
+  <aside class="paper-nav">
+    <div class="paper-nav-title">Contents</div>
+    <a href="index.html" style="color:var(--muted)">&#8592; Main Research</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Thread 2</div>
+    <a href="#t2-overview" style="padding-left:0.75rem">Overview</a>
+    <a href="#t2-heatmap" style="padding-left:0.75rem">Garment &times; Country Heatmap</a>
+    <a href="#t2-kerchief" style="padding-left:0.75rem">Kerchief Regional Breakdown</a>
+    <a href="#t2-stocking" style="padding-left:0.75rem">The Stocking Anomaly</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Other Pages</div>
+    <a href="thread1.html" style="padding-left:0.75rem;color:var(--geo)">Thread 1: Regional Granularity ↗</a>
+  </aside>
+
+  <div class="paper-content">
+
+  <div id="t2-overview" class="section">
+    <div class="section-label" style="color:var(--floral)">Thread 2 &mdash; Object Type Patterns</div>
+    <div class="section-title">Does garment type predict floral motif more strongly than country or gender?</div>
+    <div class="section-desc">Thread 2 investigates whether the function of a garment correlates with its motif. The hypothesis: garments worn close to the face or used as identity-expressing accessories (kerchiefs, caps) should concentrate floral motifs, while structural items (shoes, sashes) should skew geometric. The data largely supports this but with important regional caveats from Thread 1. Note: these visualizations draw on the broader dataset that includes the object type column, which was not available in the Tableau analysis.</div>
+
+    <div class="callout-row">
+      <div class="callout"><div class="num" style="color:var(--floral)">80%</div><div class="lbl">Kerchief floral rate</div><div class="sub">most floral garment type (n=41)</div></div>
+      <div class="callout"><div class="num" style="color:var(--geo)">4%</div><div class="lbl">Shoe floral rate</div><div class="sub">least floral garment type (n=47)</div></div>
+      <div class="callout"><div class="num" style="color:var(--neither)">5%</div><div class="lbl">Sash floral rate</div><div class="sub">nearly as low as shoes (n=21)</div></div>
+    </div>
+
+    <div class="legend">
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Floral only</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--both)"></div>Both floral + geometric</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--geo)"></div>Geometric only</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--neither)"></div>Neither classified</div>
+    </div>
+
+    <div id="obj-bars"></div>
+
+    <div class="insight">
+      <div class="insight-label">What the object pattern tells us</div>
+      <p>The kerchief&apos;s 80% floral rate connects to what the Blanche Payne archive documents: women would often weave flowers or coins into their hair and headdresses marked age and marital status. <strong>Floral motifs concentrated in face-framing, visible accessories, not randomly distributed across all garment types.</strong> Shoes and sashes, by contrast, are structural items where geometric pattern-weaving dominates.</p>
+    </div>
+  </div>
+
+  <div id="t2-heatmap" class="section">
+    <div class="country-header" style="border-top:none;margin-top:0;padding-top:0">
+      <span class="country-name">Floral rate by garment type &times; country</span>
+      <span class="country-badge">Heatmap &mdash; darker = higher floral rate</span>
+    </div>
+    <p class="country-flag" style="margin-bottom:0.5rem">Each cell shows the number of items and the floral inclusion rate for that garment type and country combination. Empty cells mean that garment type does not appear in that country&apos;s collection &mdash; itself a curatorial signal.</p>
+    <div class="heat-wrap" id="heatmap-wrap"></div>
+
+    <div class="insight">
+      <div class="insight-label">What the heatmap reveals</div>
+      <p>Croatia&apos;s kerchief column is the darkest in the table (92% floral), reflecting Posavina&apos;s dominance. Serbia&apos;s stocking cell is also notably dark (80%) &mdash; driven entirely by Sumadija men&apos;s ceremonial stockings. <strong>Macedonia and Serbia&apos;s apron cells are both present but much lighter than Croatia&apos;s</strong>, confirming that the same garment type carries different motif traditions across regions.</p>
+    </div>
+  </div>
+
+  <div id="t2-kerchief" class="section">
+    <div class="country-header" style="border-top:none;margin-top:0;padding-top:0">
+      <span class="country-name">Does the kerchief pattern hold across regions?</span>
+      <span class="country-badge">Kerchief floral rate by region</span>
+    </div>
+    <p class="country-flag" style="margin-bottom:1.5rem">If garment type truly predicts motif regardless of region, the kerchief should be predominantly floral everywhere. This mostly holds &mdash; but with one significant exception in Macedonia.</p>
+    <div id="kerchief-regional"></div>
+
+    <div class="insight">
+      <div class="insight-label">The kerchief caveat</div>
+      <p>The overall 80% kerchief floral rate is <strong>heavily driven by Posavina&apos;s 20 kerchiefs at 90% floral</strong>. Macedonia&apos;s Debar and Pelagonija kerchiefs are 0% floral. Regional tradition can override garment-type tendency &mdash; which reinforces Thread 1&apos;s finding that region is the stronger predictor of motif.</p>
+    </div>
+  </div>
+
+  <div id="t2-stocking" class="section">
+    <div class="country-header" style="border-top:none;margin-top:0;padding-top:0">
+      <span class="country-name">The stocking anomaly</span>
+      <span class="country-badge">Men&apos;s vs women&apos;s stockings by region</span>
+    </div>
+    <p class="country-flag" style="margin-bottom:1.5rem">Overall stockings are 27% floral. But men&apos;s stockings (53% floral) are more floral than women&apos;s (20%) &mdash; inverting the gender hypothesis for this one garment type.</p>
+    <div id="stocking-anomaly"></div>
+
+    <div class="insight">
+      <div class="insight-label">Why the stocking anomaly is a curatorial story</div>
+      <p>Serbia&apos;s Sumadija contributes 12 men&apos;s stockings &mdash; <strong>all 100% floral</strong>. These were ceremonial pieces, likely selected precisely because of their elaborate embroidery. <em>This is the most direct example in this dataset of how Blanche Payne&apos;s selection criteria shaped our findings.</em></p>
+    </div>
+
+    <div class="method-box">
+      <div class="method-label">Methodology &amp; exclusions</div>
+      <p>Floral inclusion rate = items where floral = yes divided by total items of that type. All calculations use the 500 classified rows. Garment types with n&ge;10 are shown in the main proportional bars. Items with n&lt;10 are shown in the heatmap but should not be interpreted as cultural signals &mdash; they reflect collection gaps.</p>
+    </div>
+  </div>
+
+  </div><!-- /paper-content -->
+</div><!-- /paper-layout -->
+
+<div class="bottom-nav">
+  <a href="thread1.html">&#8592; Thread 1: Regional Granularity</a>
+  <a href="index.html">Back to Main Research &#8594;</a>
+</div>
+
+<div class="tooltip" id="TIP"></div>
+
+<script>
+const TIP = document.getElementById('TIP');
+function tip(e, html) { TIP.innerHTML = html; TIP.style.opacity = '1'; TIP.style.left = (e.clientX+14)+'px'; TIP.style.top = (e.clientY-10)+'px'; }
+function untip() { TIP.style.opacity = '0'; }
+
+const COLS = { floral:'#7a3a8a', both:'#b8860b', geo:'#1e5c8a', neither:'#9a9080' };
+const MOTIFS = ['floral','both','geo','neither'];
+
+function buildObjBars() {
+  var objs = [
+    {name:'Kerchief',n:41,floral:21,both:12,geo:7,neither:1,floral_inc:80},
+    {name:'Cap',n:41,floral:10,both:7,geo:21,neither:3,floral_inc:41},
+    {name:'Chemise',n:39,floral:4,both:12,geo:23,neither:0,floral_inc:41},
+    {name:'Belt',n:43,floral:7,both:10,geo:23,neither:3,floral_inc:40},
+    {name:'Apron',n:94,floral:8,both:25,geo:61,neither:0,floral_inc:35},
+    {name:'Headdress',n:20,floral:1,both:4,geo:14,neither:1,floral_inc:25},
+    {name:'Stocking',n:81,floral:6,both:16,geo:59,neither:0,floral_inc:27},
+    {name:'Sash',n:21,floral:0,both:1,geo:18,neither:2,floral_inc:5},
+    {name:'Shoe',n:47,floral:0,both:2,geo:14,neither:31,floral_inc:4},
+  ];
+  var container = document.getElementById('obj-bars');
+  objs.forEach(function(r) {
+    var t = r.n;
+    var block = document.createElement('div');
+    block.className = 'bar-block';
+    var segs = MOTIFS.map(function(m) {
+      var count=r[m]||0; var pct=count/t*100;
+      if(pct<0.5) return '';
+      var label=pct>8?Math.round(pct)+'%':'';
+      var tc=m==='both'?'#5a3a00':'#fff';
+      return '<div class="bar-seg" style="flex:'+pct.toFixed(2)+';background:'+COLS[m]+';color:'+tc+'" onmouseenter="tip(event,\'<strong>'+r.name+'</strong><br>'+m+': '+count+' items ('+Math.round(pct)+'%)\')" onmouseleave="untip()">'+label+'</div>';
+    }).join('');
+    block.innerHTML = '<div class="bar-region-name">'+r.name+' <span style="font-size:0.75rem;font-weight:300;color:var(--muted)">n = '+r.n+'</span></div><div class="bar-row">'+segs+'</div><div class="bar-note">Floral inclusion rate: <strong>'+r.floral_inc+'%</strong></div>';
+    container.appendChild(block);
+  });
+}
+buildObjBars();
+
+function buildHeatmap() {
+  var countries = ['Bosnia-Herz.','Croatia','Macedonia','Serbia','Montenegro'];
+  var cKeys = ['Bosnia-Herzegovina','Croatia','Macedonia','Serbia','Montenegro'];
+  var objs = ['APRON','STOCKING','SHOE','CAP','KERCHIEF','BELT','CHEMISE','SASH','HEADDRESS'];
+  var heatmap = {
+    'Bosnia-Herzegovina':{APRON:{n:2,fi:0},STOCKING:null,SHOE:{n:4,fi:0},CAP:{n:1,fi:0},KERCHIEF:{n:3,fi:67},BELT:{n:1,fi:0},CHEMISE:{n:12,fi:50},SASH:null,HEADDRESS:{n:1,fi:100}},
+    'Croatia':{APRON:{n:31,fi:58},STOCKING:{n:14,fi:0},SHOE:{n:14,fi:14},CAP:{n:38,fi:42},KERCHIEF:{n:26,fi:92},BELT:{n:25,fi:52},CHEMISE:{n:4,fi:25},SASH:{n:1,fi:0},HEADDRESS:null},
+    'Macedonia':{APRON:{n:37,fi:19},STOCKING:{n:45,fi:13},SHOE:{n:10,fi:0},CAP:{n:1,fi:100},KERCHIEF:{n:11,fi:55},BELT:{n:12,fi:33},CHEMISE:{n:19,fi:47},SASH:{n:8,fi:12},HEADDRESS:{n:14,fi:21}},
+    'Serbia':{APRON:{n:22,fi:32},STOCKING:{n:20,fi:80},SHOE:{n:17,fi:0},CAP:{n:1,fi:0},KERCHIEF:{n:1,fi:100},BELT:{n:5,fi:0},CHEMISE:{n:4,fi:0},SASH:{n:9,fi:0},HEADDRESS:{n:5,fi:20}},
+    'Montenegro':{APRON:null,STOCKING:null,SHOE:{n:2,fi:0},CAP:null,KERCHIEF:null,BELT:null,CHEMISE:null,SASH:{n:2,fi:0},HEADDRESS:null},
+  };
+  var h = '<table class="heat-table"><thead><tr><th></th>';
+  objs.forEach(function(o){ h += '<th>'+o+'</th>'; });
+  h += '</tr></thead><tbody>';
+  cKeys.forEach(function(ck,ci) {
+    h += '<tr><td class="rl">'+countries[ci]+'</td>';
+    objs.forEach(function(o) {
+      var d = heatmap[ck][o];
+      if(!d){h+='<td></td>';return;}
+      var alpha = 0.08 + (d.fi/100)*0.88;
+      var textCol = d.fi > 45 ? '#f0e8f8' : 'var(--ink)';
+      h += '<td><div class="hc" style="background:rgba(122,58,138,'+alpha.toFixed(2)+')" onmouseenter="tip(event,\'<strong>'+countries[ci]+'</strong><br>'+o+'<br>'+d.n+' items<br>'+d.fi+'% floral\')" onmouseleave="untip()"><span class="hn" style="color:'+textCol+'">'+d.n+'</span><span class="hp" style="color:'+textCol+'">'+d.fi+'%</span></div></td>';
+    });
+    h += '</tr>';
+  });
+  h += '</tbody></table>';
+  document.getElementById('heatmap-wrap').innerHTML = h;
+}
+buildHeatmap();
+
+function buildKerchiefRegional() {
+  var rows = [
+    {label:'Posavina (Croatia)',n:20,fi:90},
+    {label:'Dalmatia (Croatia)',n:2,fi:100,small:true},
+    {label:'Mavrovo (Macedonia)',n:2,fi:100,small:true},
+    {label:'Kotar Varos (Bosnia)',n:2,fi:100,small:true},
+    {label:'Bigla, Smilevo (Mac.)',n:2,fi:50,small:true},
+    {label:'Pelagonija, Bitola (Mac.)',n:2,fi:0,small:true},
+    {label:'Debar, Debar (Mac.)',n:2,fi:0,small:true},
+  ];
+  var html = '<p style="font-family:Space Mono,monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem">Kerchief -- floral rate by region</p>';
+  rows.forEach(function(r) {
+    var sf = r.small ? ' <span style="font-size:0.68rem;color:var(--muted);font-style:italic">small sample (n='+r.n+')</span>' : ' <span style="font-size:0.68rem;color:var(--muted)">n='+r.n+'</span>';
+    var col = r.fi>60?'var(--floral)':r.fi>20?'var(--both)':'var(--geo)';
+    html += '<div class="obj-row"><div class="obj-label">'+r.label+'</div><div class="obj-bar-wrap"><div class="obj-bar-fill" style="width:'+r.fi+'%;background:'+col+';height:22px"></div></div><div class="obj-bar-n">'+r.fi+'%'+sf+'</div></div>';
+  });
+  document.getElementById('kerchief-regional').innerHTML = html;
+}
+buildKerchiefRegional();
+
+function buildStockingAnomaly() {
+  var rows = [
+    {label:'Sumadija men',n:12,fi:100,note:'Drives entire Serbia men anomaly'},
+    {label:'Kosovo men',n:4,fi:50,small:true},
+    {label:'Gostivar women',n:14,fi:29},
+    {label:'Mac. Unspecified women',n:15,fi:0},
+    {label:'Dalmatia women',n:8,fi:0},
+    {label:'Bitola-Prilep women',n:5,fi:0},
+    {label:'Baranja women',n:4,fi:0,small:true},
+  ];
+  var html = '<p style="font-family:Space Mono,monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem">Stocking -- floral rate by region and gender</p>';
+  rows.forEach(function(r) {
+    var sf = r.small ? ' <span style="font-size:0.68rem;color:var(--muted);font-style:italic">small sample</span>' : '';
+    var noteHtml = r.note ? ' <span style="font-size:0.72rem;color:var(--floral);font-style:italic">-- '+r.note+'</span>' : '';
+    var col = r.fi>60?'var(--floral)':r.fi>20?'var(--both)':'var(--geo)';
+    html += '<div class="obj-row"><div class="obj-label">'+r.label+'</div><div class="obj-bar-wrap"><div class="obj-bar-fill" style="width:'+r.fi+'%;background:'+col+';height:22px"></div></div><div class="obj-bar-n">'+r.fi+'%'+sf+noteHtml+'</div></div>';
+  });
+  document.getElementById('stocking-anomaly').innerHTML = html;
+}
+buildStockingAnomaly();
+</script>
+</body>
+</html>

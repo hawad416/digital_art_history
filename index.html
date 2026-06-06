@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floral vs Geometric: Yugoslav Textiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1410;--paper:#f7f2e8;
+  --floral:#7a3a8a;--floral-light:#c49ad4;--floral-dim:#e8d8f2;
+  --geo:#1e5c8a;--geo-light:#6aaed4;--geo-dim:#d0e6f4;
+  --both:#b8860b;--both-light:#e8c84a;
+  --neither:#9a9080;--muted:#7a6a58;--rule:#d4c8b0;
+}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+.masthead{border-bottom:2px solid var(--ink);padding:2.5rem 4rem 1.5rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem}
+.masthead h1{font-size:2.8rem;font-weight:300;line-height:1.1;letter-spacing:-0.02em}
+.masthead h1 .fw{font-style:italic;color:var(--floral)}
+.masthead h1 .gw{font-style:italic;color:var(--geo)}
+.masthead-sub{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted);text-align:right;line-height:2}
+.intro-strip{background:var(--ink);color:var(--paper);padding:1.2rem 4rem;display:flex;gap:3rem;align-items:center;flex-wrap:wrap}
+.section{padding:3rem 4rem;border-bottom:1px solid var(--rule);animation:fadeUp 0.4s ease both}
+.section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem}
+.section-title{font-size:1.8rem;font-weight:300;margin-bottom:0.5rem}
+.section-desc{font-size:1.1rem;color:var(--muted);font-style:italic;line-height:1.7;max-width:640px;margin-bottom:2rem}
+.prose{font-size:1.2rem;line-height:1.9;max-width:760px;margin-bottom:1.5rem}
+.prose-label{font-family:'Space Mono',monospace;font-size:1.2rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin:2rem 0 0.75rem}
+.legend{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:0.5rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.04em}
+.leg-swatch{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+.callout-row{display:flex;gap:3rem;margin-bottom:2rem;flex-wrap:wrap}
+.callout{border-left:3px solid var(--rule);padding-left:1.25rem}
+.callout .num{font-size:3rem;font-weight:300;line-height:1}
+.callout .lbl{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.08em;color:var(--muted);margin-top:4px;text-transform:uppercase}
+.callout .sub{font-size:0.82rem;color:var(--muted);font-style:italic;margin-top:4px}
+.insight{background:var(--ink);color:var(--paper);padding:1.5rem 2rem;margin-top:2rem}
+.insight-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:#9a8c78;margin-bottom:0.5rem}
+.insight p{font-size:0.92rem;font-style:italic;color:#d4c8b0;line-height:1.8}
+.insight strong{color:var(--paper);font-style:normal;font-weight:500}
+.findings-heading{font-size:2.4rem;font-weight:400;margin-top:3rem;margin-bottom:1.5rem;color:var(--ink);border-bottom:2px solid var(--ink);padding-bottom:0.5rem}
+.finding-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:2rem}
+.finding-card{background:var(--paper);padding:1.25rem 1.5rem;position:relative;overflow:hidden}
+.finding-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.finding-card.f-floral::after{background:var(--floral)}
+.finding-card.f-geo::after{background:var(--geo)}
+.finding-card.f-both::after{background:var(--both)}
+.finding-card.f-n::after{background:var(--neither)}
+.fc-label{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--muted);margin-bottom:0.4rem;text-transform:uppercase}
+.fc-num{font-size:2.4rem;font-weight:300;line-height:1;margin-bottom:0.2rem}
+.fc-sub{font-size:0.82rem;color:var(--muted);font-style:italic;line-height:1.4}
+.divider{border:none;border-top:1px solid var(--rule);margin:2.5rem 0}
+.img-caption{font-size:0.8rem;color:var(--muted);font-style:italic;margin-top:0.5rem;line-height:1.6}
+.tooltip{position:fixed;background:var(--ink);color:var(--paper);padding:0.5rem 0.9rem;font-size:0.72rem;font-family:'Space Mono',monospace;pointer-events:none;opacity:0;transition:opacity 0.12s;z-index:100;border-left:3px solid var(--floral);max-width:220px;line-height:1.6}
+
+/* thread link cards */
+.thread-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.thread-card{border:1px solid var(--rule);padding:1.75rem 2rem;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s}
+.thread-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.thread-card.tc-1::after{background:var(--geo)}
+.thread-card.tc-2::after{background:var(--floral)}
+.thread-card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.thread-card-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+.thread-card-title{font-size:1.3rem;font-weight:300;margin-bottom:0.75rem;line-height:1.3}
+.thread-card-desc{font-size:0.9rem;color:var(--muted);font-style:italic;line-height:1.7;margin-bottom:1rem}
+.thread-card-arrow{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;color:var(--muted)}
+
+.paper-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:3rem;max-width:1600px;margin:0 auto}
+.paper-nav{position:sticky;top:2rem;align-self:start;padding-left:2rem}
+.paper-nav-title{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.paper-nav a{display:block;color:var(--muted);text-decoration:none;margin-bottom:0.75rem;font-size:0.9rem;transition:all 0.2s ease}
+.paper-nav a:hover{color:var(--ink);transform:translateX(4px)}
+.paper-content{min-width:0}
+
+@media (max-width:1100px){
+  .paper-layout{grid-template-columns:1fr}
+  .paper-nav{position:relative;top:auto;padding-left:0;margin-bottom:2rem}
+  .thread-cards{grid-template-columns:1fr}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <h1><span class="fw">Floral</span> versus <span class="gw">Geometric</span><br>in Yugoslav Textiles</h1>
+  <div class="masthead-sub">
+    Henry Art Gallery &middot; Eastern European Art<br>
+    ART H 209: Digital Art History<br>
+    Tatev, Jewel, Joseph, Hawa, Sophia, Charlie
+  </div>
+</div>
+
+<div id="research-question" class="intro-strip">
+  <p style="font-size:1.5rem;font-weight:300;line-height:1.8;font-style:italic;color:#f9f2e2;max-width:760px">The central research question: is there a relationship between country of origin, gender, and visual motif type across the Henry Gallery&apos;s Yugoslav costume & textile collection?</p>
+</div>
+<br>
+<br>
+
+<div class="paper-layout">
+
+  <aside class="paper-nav">
+    <div class="paper-nav-title">Contents</div>
+
+    <a href="#research-question" style="font-weight:500">Research Question</a>
+
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Dataset &amp; Context</div>
+    <a href="#dataset-intro" style="padding-left:0.75rem">Dataset Introduction</a>
+    <a href="#research-background" style="padding-left:0.75rem">Research Background</a>
+    <a href="#blanche-payne" style="padding-left:1.25rem;font-size:0.82rem">Blanche Payne</a>
+    <a href="#selection-process" style="padding-left:0.75rem">Selection Process</a>
+    <a href="#methodology" style="padding-left:0.75rem">Methodology</a>
+    <a href="#cases" style="padding-left:1.25rem;font-size:0.82rem">Case Studies</a>
+    <a href="#collection-overview" style="padding-left:1.25rem;font-size:0.82rem">Collection Overview</a>
+
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Analysis</div>
+    <a href="#data-processing" style="padding-left:0.75rem">Data Processing</a>
+    <a href="#tableau-viz" style="padding-left:0.75rem">Tableau Visualizations</a>
+    <a href="#gender-motif" style="padding-left:0.75rem">Gender &amp; Motif</a>
+    <a href="#findings" style="padding-left:0.75rem">Findings &amp; Conclusions</a>
+
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Further Inquiry</div>
+    <a href="thread1.html" style="padding-left:0.75rem;color:var(--geo)">Thread 1: Regional Granularity ↗</a>
+    <a href="thread2.html" style="padding-left:0.75rem;color:var(--floral)">Thread 2: Object Type Patterns ↗</a>
+
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Context</div>
+    <a href="yugoslavia.html" style="padding-left:0.75rem;color:var(--both)">Former Yugoslavia ↗</a>
+  </aside>
+
+  <div class="paper-content">
+
+  <!-- DATASET INTRO -->
+  <div id="dataset-intro" class="section">
+    <div class="section-title" style="color:var(--geo)">Dataset Introduction</div>
+    <br>
+    <div class="section-title">The Henry Art Gallery&apos;s Yugoslav Textile Collection</div>
+    <p class="prose">For our research, we were inspired by the collection of Eastern European textiles in the Henry Art Gallery, located on the University of Washington&apos;s campus in Seattle, Washington. Several of the costumes found in the Henry Art Gallery&apos;s exhibit were used for folk dancing and other traditional practices across Eastern Europe. Each piece found in this museum employs unique craftsmanship, from intricately woven pattern rugs to hand-stitched clothing and garments.</p>
+
+    <div style="margin-top:1.5rem">
+      <img src="images/henry_gallery.jpeg" alt="Henry Art Gallery at the University of Washington" style="width:100%;max-height:340px;object-fit:cover;border-radius:2px;border:1px solid var(--rule)">
+      <p class="img-caption" style="margin-top:0.5rem">The Henry Art Gallery, University of Washington, Seattle: home of the Eastern European Art we analyze.</p>
+    </div>
+    <br><br>
+    <div id="research-background" class="prose-label">Research: Background, Relevant Happenings, Timelines</div>
+    <div style="display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start">
+      <p class="prose" style="margin-bottom:0">The textiles found in this exhibit, Carrying History, were originally curated by University of Washington professors, who had hoped to use them as study references for their students in the 1930s. Among these textiles were hundreds of different rugs, bags, costumes, and other articles of clothing, each reflecting the different cultural aspects of their countries of origin. As the collection began to grow, it evolved into the Costume and Textile Study Center at the University of Washington in the 1950s. This diverse assortment of textiles continued to be used for valuable research by students and other scholars until the University&apos;s Home Economics and Textile Study programs lost funding due to budget cuts. As a result, the curated fabrics and clothing were transferred to the Henry Art Gallery in 1982 to preserve their historical significance. The artifacts still hold great value today, both academically and monetarily, as the Art Gallery continued to grow the collection, combining it with a broader collection of contemporary art and materials. Throughout the decades, this collection has served as a key example of craftsmanship in textiles across a variety of countries.</p>
+      <div>
+        <img src="images/henry_gallery_textiles.png" alt="Henry Art Gallery textile collection" style="width:100%;border-radius:2px;border:1px solid var(--rule);object-fit:cover">
+        <p class="img-caption" style="margin-top:0.5rem">The Henry Art Gallery&apos;s Costume and Textiles</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div id="blanche-payne" class="prose-label">Blanche Payne&apos;s Research Process</div>
+
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:2rem;align-items:start">
+        <div style="position:sticky;top:2rem">
+          <img src="images/blanche_payne_1.jpg" alt="Blanche Payne" style="width:100%;border-radius:2px;border:1px solid var(--rule)">
+          <p class="img-caption" style="margin-top:0.5rem">Regional costumes photographed by Payne, now held in the Henry Art Gallery permanent collection.</p>
+        </div>
+        <div>
+          <p class="prose">The collection of Eastern European Folk Costumes was primarily assembled by UW faculty member, Blanche Payne. Payne traveled alone through Yugoslavia in 1930 and again in 1936&ndash;37 to document and collect regional folk costumes. It was considered unusual at the time for a woman to travel alone, and Payne visited remote villages, markets, and festivals throughout the country. During her time there, she photographed people in their everyday lives and studied regional dress firsthand. Her research focused on the regions of Croatia, Macedonia, Bosnia, North Serbia, and Dalmatia, and she collaborated with both the Croatian National Museum in Zagreb and the Ethnographic Museum in Belgrade to expand the collection.</p>
+          <p class="prose">Payne collected during a particularly significant historical moment. Yugoslavia had only recently been unified. The Kingdom of Serbs, Croats and Slovenes was formed in 1918, and renamed the Kingdom of Yugoslavia in 1929 under King Alexander I&apos;s dictatorship. By the time of Payne&apos;s travels, regional folk dress was transitioning from everyday wear to a marker of national and cultural identity which we later hypothesized could have also influenced which regions had florals or geometrics.</p>
+          <div style="margin:1.5rem 0">
+            <img src="images/blanche_payne_2.png" alt="Blanche Payne photographing costumes in Yugoslavia" style="width:100%;max-height:260px;object-fit:cover;border-radius:2px;border:1px solid var(--rule)">
+            <p class="img-caption" style="margin-top:0.5rem">Blanche Payne documenting regional folk costume &amp; drawing collection during her field research in Yugoslavia, 1930s.</p>
+          </div>
+          <p class="prose">As the Blanche Payne archive notes: &ldquo;People identified mostly with their historic regions or lands until the nineteenth century, when the development of capitalism and integration processes caused the birth of modern national identities, so that Slovenes, Croats, Serbs, Bosnian Muslims, Macedonians, and Montenegrins each started to identify themselves as ethnic nations. Also at this time, there was a resurgence of interest in regional dress, which coincided with a romanticized and idealized idea of the peasant past, which culminated in the idea of &lsquo;our dress,&rsquo; emblematic of national identity.&rdquo;<sup>1</sup> Payne was documenting these disappearing regional traditions at exactly the moment they were becoming politicized symbols. The collection was later complemented by Margaret Hord&apos;s donation of Eastern European costumes in 2003, strengthening and broadening the holdings at the Henry Art Gallery. <span style="font-size:0.78rem;color:var(--muted)"><sup>1</sup> Blanche Payne Regional Costume Photograph and Drawing Collection, Archives West, Historical Background section.</span></p>
+        </div>
+      </div>
+      </div>
+
+    <br><br>
+    <div id="selection-process" class="prose-label">Selection Process</div>
+    <p class="prose">Since our dataset consisted of thousands of textiles and objects, it was logical to condense the data into a series that is much more manageable. After careful consideration, our team decided that a large portion of our data included textiles from Yugoslavia. In fact, it appeared to be the focus of our dataset, so we decided to focus on Yugoslavia and remove the artifacts from all other regions.</p>
+    <p class="prose">After identifying the country we would be focusing on, our data set still included an overwhelming amount of information for each artifact, with a wide range of varying media. In order to determine the relationships between our variables, we first considered narrowing our data set to a single medium (i.e. photography). Upon further analysis, we decided to adjust our parameters and explore other media options. One of the greatest issues with our data set was how the textiles included several different styles and attributes, making it difficult to categorize each artifact for our research. Articles of clothing were sewn differently, featured an array of different patterns, and created for different regions of Yugoslavia. The research questions for this data set were then readjusted to determine how gender influenced the patterns and characteristics of Yugoslavian textiles.</p>
+
+    <br><br>
+    <div id="methodology" class="prose-label">Methodology: How the Study Was Designed</div>
+    <p class="prose">After the initial refining of our data, we began to examine the relationships between the individual artifacts. Since the dataset includes such a wide variety of artifacts, it was difficult to determine the relationships between certain textiles. For instance, each article of clothing included different styles of sewing techniques (each was recorded in the dataset), featured different patterns, and was crafted in different areas of Yugoslavia.</p>
+
+    <hr class="divider">
+    <div id="cases" class="section-title"><strong>Case Studies: Examples from the Collection</strong></div>
+    <p style="font-size:0.9rem;color:var(--muted);font-style:italic;margin-bottom:1.25rem;line-height:1.7">The following examples illustrate how individual garments were categorized, and demonstrate the range of motif types found across the collection.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem">
+      <div>
+        <img src="images/case_study_1_hat.png" alt="Croatian mens hat with both geometric and floral motifs" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+        <p class="img-caption">A Croatian men&apos;s hat that fits under the &ldquo;both&rdquo; category, since it contains both a geometric pattern and floral motifs.</p>
+      </div>
+      <div>
+        <img src="images/case_study_1_sock.png" alt="Croatian mens sock with geometric pattern" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+        <p class="img-caption">A closeup of a Croatian men&apos;s sock that fits into the geometric category due to its geometric pattern.</p>
+      </div>
+      <div>
+        <img src="images/case_study_1_apron.png" alt="Croatian womens apron with floral motifs" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+        <p class="img-caption">A Croatian women&apos;s apron that fits into the floral category due to its floral motifs.</p>
+      </div>
+    </div>
+    <br>
+
+    <div style="margin-top:2rem">
+      <div class="prose-label"><strong>Case Study 2: Serbian Socks</strong></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:0.75rem">
+        <div>
+          <img src="images/case_study_2_womensock.png" alt="Serbian womens stocking floral" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Serbian women&apos;s sock.</p>
+        </div>
+        <div>
+          <img src="images/case_study_2_babysock.png" alt="Serbian baby stocking floral" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Serbian child&apos;s sock.</p>
+        </div>
+        <div>
+          <img src="images/case_study_2_mensock.png" alt="Serbian mens stocking floral" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Serbian men&apos;s sock.</p>
+        </div>
+      </div>
+      <p class="img-caption" style="margin-top:0.75rem">All three Serbian stockings above fit into the floral category. The men&apos;s examples are a key anomaly discussed in Thread 2 where their 100% floral rate inverts the gender hypothesis and reflects a curatorial story about what Blanche Payne chose to collect from Sumadija in Serbia.</p>
+    </div>
+  </div>
+
+  <!-- COLLECTION OVERVIEW -->
+  <div id="collection-overview" class="section">
+    <div class="prose-label" style="color:var(--geo)">Collection Overview</div>
+    <div class="section-title">The motif landscape at a glance</div>
+    <div class="finding-row" id="finding-row"></div>
+    <div class="section-desc">How the 500 classified items distribute across four mutually exclusive motif categories. An item is counted in only one category.</div>
+  </div>
+
+  <!-- DATA PROCESSING -->
+  <div id="data-processing" class="section">
+    <div class="section-title">Data Processing</div>
+    <p class="prose">In order to focus on the relevant given information about gender, pattern, and country of origin, we chose to remove many of the additional information on variables that were irrelevant to our research focus, such as materials used, the date made, and the size measurements. This cut our variable columns down to countries of origin, gender, and a variable called &ldquo;subject/theme&rdquo;, which contained information about patterns and motifs on the artworks. We decided to only look at artworks that had data present about each of those categories, which helped us narrow down our dataset to exactly 500 entries. Our team members Hawa and Jewel, with help from our TA Niko, categorized the &ldquo;subject/theme&rdquo; column by the key words it contained about motifs in each piece &mdash; either floral or geometric (within which we decided to include stripes), as well as &ldquo;both&rdquo; (containing both floral and geometric motifs) and &ldquo;neither&rdquo; (not containing floral or geometric motifs).</p>
+    <p class="prose">At this point, we were able to input our data into Tableau and begin creating visualizations. We struggled significantly in the beginning, but after meeting with Niko and our data librarian, Negeen, we were able to create multiple visualizations that were relevant and useful to our research. These visualizations included bar charts displaying the frequencies of each motif category separated by gender, another one displaying the ratios of floral to geometric patterns visualized on a map, and a ratio box display that has the ability to toggle between countries.</p>
+    <p class="prose">Note: the visualizations on this website draw on a broader version of our dataset that includes an &ldquo;Object Type&rdquo; column (kerchief, cap, shoe, etc.) which we did not rely on in our original Tableau analysis.</p>
+
+    <div style="margin-top:2rem">
+      <h2 id="tableau-viz" class="findings-heading">Tableau Visualizations</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem">
+        <div>
+          <img src="images/freq_by_gender_1.png" alt="Bar chart showing frequency of motif categories by gender" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Bar chart detailing the number of costumes classified as floral, geometric, both, or neither, separated by gender.</p>
+        </div>
+        <div>
+          <img src="images/freq_by_gender_2.png" alt="Stacked bar chart showing pattern categories with gender breakdown" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Stacked bar chart showing the ratio of men&apos;s and women&apos;s costumes within each pattern category. The ratio of men in geometric and neither categories is higher than in floral and both categories.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <div class="prose-label">Floral &amp; Geometric Distribution by Country</div>
+      <p style="font-size:0.9rem;color:var(--muted);font-style:italic;margin-top:0.5rem;margin-bottom:1.25rem;line-height:1.7">Use the arrows to cycle through each country view.</p>
+      <div style="border:1px solid var(--rule);border-radius:4px;overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1.25rem;border-bottom:1px solid var(--rule)">
+          <button onclick="slideshow(-1)" style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;background:none;border:0.5px solid var(--rule);padding:6px 14px;cursor:pointer;border-radius:2px;font-weight:700;color:var(--ink)">&#8592; prev</button>
+          <span id="slide-label" style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">All Countries</span>
+          <button onclick="slideshow(1)" style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;background:none;border:0.5px solid var(--rule);padding:6px 14px;cursor:pointer;border-radius:2px;font-weight:700;color:var(--ink)">next &#8594;</button>
+        </div>
+        <div style="padding:1.25rem">
+          <img id="slide-img" src="images/ratios_all.png" alt="Ratio chart" style="width:100%;max-height:320px;object-fit:contain;border-radius:2px;display:block;background:#fff">
+          <p id="slide-caption" class="img-caption" style="margin-top:0.75rem">Motif ratios across all five countries. Croatia shows the highest floral rate; Macedonia and Serbia skew most strongly geometric.</p>
+        </div>
+        <div style="display:flex;justify-content:center;gap:6px;padding:0.75rem;border-top:1px solid var(--rule)">
+          <span class="slide-dot" onclick="goSlide(0)" style="width:8px;height:8px;border-radius:50%;background:var(--ink);cursor:pointer;display:inline-block"></span>
+          <span class="slide-dot" onclick="goSlide(1)" style="width:8px;height:8px;border-radius:50%;background:var(--rule);cursor:pointer;display:inline-block"></span>
+          <span class="slide-dot" onclick="goSlide(2)" style="width:8px;height:8px;border-radius:50%;background:var(--rule);cursor:pointer;display:inline-block"></span>
+          <span class="slide-dot" onclick="goSlide(3)" style="width:8px;height:8px;border-radius:50%;background:var(--rule);cursor:pointer;display:inline-block"></span>
+          <span class="slide-dot" onclick="goSlide(4)" style="width:8px;height:8px;border-radius:50%;background:var(--rule);cursor:pointer;display:inline-block"></span>
+          <span class="slide-dot" onclick="goSlide(5)" style="width:8px;height:8px;border-radius:50%;background:var(--rule);cursor:pointer;display:inline-block"></span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2.5rem">
+      <div class="prose-label">Floral Map by Gender</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem">
+        <div>
+          <img src="images/floral_map_women.png" alt="Floral motif distribution womens garments" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Floral motif distribution across women&apos;s garments by country.</p>
+        </div>
+        <div>
+          <img src="images/floral_map_men.png" alt="Floral motif distribution mens garments" style="width:100%;border:1px solid var(--rule);border-radius:2px">
+          <p class="img-caption">Floral motif distribution across men&apos;s garments. Note Serbia&apos;s unexpectedly high floral rate, driven by elaborately embroidered ceremonial stockings from Sumadija.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENDER / SLOPE -->
+  <div id="gender-motif" class="section">
+    <div class="section-title" style="color:var(--floral)">Gender &amp; Motif</div>
+    <div class="section-title">Do women&apos;s and men&apos;s garments differ in motif type?</div>
+    <div class="section-desc">The slope chart below shows the floral inclusion rate for women&apos;s vs men&apos;s clothing, broken out by country. Lines that slope downward confirm the hypothesis. Lines that slope upward are anomalies worth examining.</div>
+    <div class="callout-row">
+      <div class="callout">
+        <div class="num" style="color:var(--floral)">38%</div>
+        <div class="lbl">Women&apos;s floral inclusion</div>
+        <div class="sub">164 of 428 items include floral</div>
+      </div>
+      <div class="callout">
+        <div class="num" style="color:var(--geo)">22%</div>
+        <div class="lbl">Men&apos;s floral inclusion</div>
+        <div class="sub">15 of 67 items include floral</div>
+      </div>
+      <div class="callout">
+        <div class="num" style="color:var(--both)">6:1</div>
+        <div class="lbl">Women to men ratio</div>
+        <div class="sub">428 women&apos;s vs 67 men&apos;s items</div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Women&apos;s floral rate (left axis)</div>
+      <div class="leg-item"><div class="leg-swatch" style="background:var(--geo)"></div>Men&apos;s floral rate (right axis)</div>
+    </div>
+    <div style="position:relative;width:100%;overflow-x:auto">
+      <canvas id="slope-canvas" height="360" role="img" aria-label="Slope chart comparing women vs men floral inclusion rates by country"></canvas>
+    </div>
+    <div class="insight">
+      <div class="insight-label">Reading the slope chart</div>
+      <p>Most countries show women&apos;s floral rates above men. <strong>Serbia is the notable exception</strong>: men&apos;s floral rate (44%) exceeds women&apos;s (25%). This is almost entirely driven by 12 elaborately embroidered men&apos;s stockings from Sumadija, all 100% floral &mdash; likely ceremonial pieces selected by Blanche Payne precisely because of their visual complexity. The 6:1 imbalance in sample sizes means percentages should be read carefully. This website&apos;s visualizations draw on a broader version of the dataset that includes the object type column, allowing comparisons beyond what was possible in Tableau.</p>
+    </div>
+  </div>
+
+  <!-- FINDINGS -->
+  <div id="findings" class="section">
+    <h2 class="findings-heading">Findings</h2>
+    <p class="prose">In the end, we were unable to identify any strong conclusions from our data, and this study had inconclusive results. Approximately 13% of the data included men&apos;s clothing, which made it difficult to find relationships between genders and textile patterns. There was, however, a slight correlation between gender and motif in the Yugoslavian data set. Men&apos;s clothing often features geometric patterns while women&apos;s clothing tends to feature floral patterns.</p>
+    <p class="prose">Given the limitations of our initial findings, we became curious about whether patterns might emerge at a more granular level of analysis. We posed two additional threads of inquiry. The first examined whether floral and geometric motifs distribute differently across sub-regions within the same country, asking whether city or village-level variation might reveal cultural distinctions that country-level analysis obscures. The second asked whether garment type, rather than gender or country of origin, might be a stronger predictor of motif: specifically, whether certain types of clothing consistently carry floral motifs while others tend toward geometric. These threads were not designed to replace our original hypothesis, but to extend it: if gender alone does not explain the pattern, perhaps the answers lie in where a garment was made, or what kind of garment it is.</p>
+
+    <div class="thread-cards">
+      <a href="thread1.html" class="thread-card tc-1">
+        <div class="thread-card-label">Thread 1 &mdash; Further Inquiry</div>
+        <div class="thread-card-title">Regional Granularity: does sub-region predict motif more than country?</div>
+        <div class="thread-card-desc">Country-level data masks enormous variation. Two regions within Croatia show a 65-point gap in floral rates, mapping directly onto Habsburg vs. Venetian imperial histories.</div>
+        <div class="thread-card-arrow">Explore Thread 1 &rarr;</div>
+      </a>
+      <a href="thread2.html" class="thread-card tc-2">
+        <div class="thread-card-label">Thread 2 &mdash; Further Inquiry</div>
+        <div class="thread-card-title">Object Type Patterns: does garment function predict motif?</div>
+        <div class="thread-card-desc">Kerchiefs are 80% floral; shoes are 4% floral. The hypothesis that face-framing accessories concentrate floral motifs is largely supported &mdash; with important regional exceptions.</div>
+        <div class="thread-card-arrow">Explore Thread 2 &rarr;</div>
+      </a>
+    </div>
+
+    <p class="prose" style="margin-top:2rem">It is important to note that while this collection provides an authentic look into the region, it cannot be treated as an exhaustive view of all Eastern European clothing. The findings from this study cannot be generalized based off of the textiles featured in the Henry Art Gallery&apos;s exhibit. Because the data set featured articles of clothing and textiles hand-selected by University of Washington professors, there may have been selection bias involved in the process. Therefore, it would be unrealistic to assume this data set represents patterns found all across Yugoslavia. After reviewing the data and conclusions, it would be greatly beneficial to see if there are stronger connections between motifs and different categories of textiles in a future study.</p>
+  </div>
+
+  </div><!-- /paper-content -->
+</div><!-- /paper-layout -->
+
+<div class="tooltip" id="TIP"></div>
+
+<script>
+const TIP = document.getElementById('TIP');
+function tip(e, html) { TIP.innerHTML = html; TIP.style.opacity = '1'; TIP.style.left = (e.clientX+14)+'px'; TIP.style.top = (e.clientY-10)+'px'; }
+function untip() { TIP.style.opacity = '0'; }
+
+const COLS = { floral:'#7a3a8a', both:'#b8860b', geo:'#1e5c8a', neither:'#9a9080' };
+const overviewCounts = { geo:275, floral:69, both:110, neither:46 };
+const total = 500;
+const defs = [
+  {key:'geo',cls:'f-geo',label:'Geometric only',sub:overviewCounts.geo+' items -- geometric motif present, no floral'},
+  {key:'floral',cls:'f-floral',label:'Floral only',sub:overviewCounts.floral+' items -- floral motif present, no geometric'},
+  {key:'both',cls:'f-both',label:'Both motifs',sub:overviewCounts.both+' items -- floral and geometric combined'},
+  {key:'neither',cls:'f-n',label:'Neither',sub:overviewCounts.neither+' items -- no motif recorded'},
+];
+var row = document.getElementById('finding-row');
+defs.forEach(function(d) {
+  var pct = Math.round(overviewCounts[d.key]/total*100);
+  row.innerHTML += '<div class="finding-card '+d.cls+'"><div class="fc-label">'+d.label+'</div><div class="fc-num" style="color:'+COLS[d.key]+'">'+pct+'%</div><div class="fc-sub">'+d.sub+'</div></div>';
+});
+
+const slopeData = {
+  'Bosnia-Herz.':{wn:24,mn:5,wf:46,mf:0,col:'#8a6a20'},
+  'Croatia':     {wn:151,mn:16,wf:54,mf:12,col:'#2a7a5a'},
+  'Macedonia':   {wn:161,mn:15,wf:29,mf:7,col:'#8a3a50'},
+  'Serbia':      {wn:83,mn:27,wf:25,mf:44,col:'#1e5c8a'},
+  'Montenegro':  {wn:4,mn:3,wf:50,mf:0,col:'#5a8a4a'},
+};
+
+function buildSlope() {
+  var canvas = document.getElementById('slope-canvas');
+  if (!canvas) return;
+  var W = Math.min(canvas.parentElement.offsetWidth || 700, 800);
+  canvas.width = W; canvas.height = 360;
+  var ctx = canvas.getContext('2d');
+  var pad = {l:160,r:160,t:50,b:50};
+  var iH = 360 - pad.t - pad.b;
+  var xL = pad.l, xR = W - pad.r;
+  ctx.fillStyle = COLS.floral; ctx.font = 'italic 13px Cormorant Garamond,serif';
+  ctx.textAlign = 'center'; ctx.fillText("Women's -- floral %", xL, pad.t-24);
+  ctx.fillStyle = COLS.geo; ctx.fillText("Men's -- floral %", xR, pad.t-24);
+  [0,25,50,75,100].forEach(function(v) {
+    var y = pad.t + iH*(1-v/100);
+    ctx.beginPath(); ctx.moveTo(xL-4,y); ctx.lineTo(xL,y); ctx.strokeStyle='#c4b89a'; ctx.lineWidth=0.5; ctx.stroke();
+    ctx.fillStyle='#9a8a78'; ctx.font='10px Space Mono,monospace';
+    ctx.textAlign='right'; ctx.fillText(v+'%',xL-8,y+4);
+    ctx.beginPath(); ctx.moveTo(xR,y); ctx.lineTo(xR+4,y); ctx.stroke();
+    ctx.textAlign='left'; ctx.fillText(v+'%',xR+8,y+4);
+  });
+  ctx.beginPath(); ctx.moveTo(xL,pad.t); ctx.lineTo(xL,pad.t+iH); ctx.strokeStyle=COLS.floral; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(xR,pad.t); ctx.lineTo(xR,pad.t+iH); ctx.strokeStyle=COLS.geo; ctx.lineWidth=1.5; ctx.stroke();
+  Object.keys(slopeData).forEach(function(name) {
+    var d = slopeData[name];
+    var yW = pad.t + iH*(1-d.wf/100);
+    var yM = pad.t + iH*(1-d.mf/100);
+    ctx.beginPath(); ctx.moveTo(xL,yW); ctx.lineTo(xR,yM); ctx.strokeStyle=d.col; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.beginPath(); ctx.arc(xL,yW,4,0,Math.PI*2); ctx.fillStyle=d.col; ctx.fill();
+    ctx.beginPath(); ctx.arc(xR,yM,4,0,Math.PI*2); ctx.fill();
+    ctx.font='12px Cormorant Garamond,serif'; ctx.fillStyle=d.col;
+    ctx.textAlign='right'; ctx.fillText(name+'  '+d.wf+'%  (n='+d.wn+')',xL-10,yW+4);
+    ctx.textAlign='left'; ctx.fillText(d.mf+'%  (n='+d.mn+')  '+name,xR+10,yM+4);
+  });
+}
+
+var slides = [
+  {src:'images/ratios_all.png',label:'All Countries',caption:'Motif ratios across all five countries. Croatia shows the highest floral rate; Macedonia and Serbia skew most strongly geometric.'},
+  {src:'images/ratios_croatia.png',label:'Croatia',caption:'Croatia has the highest floral inclusion rate in the dataset at 50%, driven heavily by Posavina region items. Geometric still dominates overall.'},
+  {src:'images/ratios_serbia.png',label:'Serbia',caption:'Serbia sits at 30% floral inclusion. The high both category in Sumadija inflates this -- driven by elaborately embroidered ceremonial stockings.'},
+  {src:'images/ratios_macedonia.png',label:'Macedonia',caption:'Macedonia is the most geometric-dominant country at 82% geometric inclusion. Floral motifs appear in only 26% of items.'},
+  {src:'images/ratios_bosnia.png',label:'Bosnia-Herzegovina',caption:'Bosnia-Herzegovina has a small sample (n=29) -- findings should be interpreted cautiously. Geometric dominates at 83% inclusion.'},
+  {src:'images/ratios_montenegro.png',label:'Montenegro',caption:'Montenegro has the smallest sample in the dataset (n=7). No meaningful conclusions can be drawn from this country alone.'},
+];
+var currentSlide = 0;
+function goSlide(n) {
+  currentSlide = n;
+  var img = document.getElementById('slide-img');
+  var lbl = document.getElementById('slide-label');
+  var cap = document.getElementById('slide-caption');
+  if (!img||!lbl||!cap) return;
+  img.src = slides[n].src; lbl.textContent = slides[n].label; cap.textContent = slides[n].caption;
+  document.querySelectorAll('.slide-dot').forEach(function(dot,i){ dot.style.background = i===n?'var(--ink)':'var(--rule)'; });
+}
+function slideshow(dir) { currentSlide=(currentSlide+dir+slides.length)%slides.length; goSlide(currentSlide); }
+
+window.addEventListener('load', function(){ goSlide(0); buildSlope(); });
+</script>
+</body>
+</html>

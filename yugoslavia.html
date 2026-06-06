@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Former Yugoslavia — Context & History</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1410;--paper:#f7f2e8;
+  --floral:#7a3a8a;--geo:#1e5c8a;--both:#b8860b;
+  --muted:#7a6a58;--rule:#d4c8b0;
+}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+
+.masthead{border-bottom:2px solid var(--ink);padding:2rem 4rem 1.25rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem}
+.masthead-back{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1rem;transition:color 0.2s}
+.masthead-back:hover{color:var(--ink)}
+.masthead h1{font-size:2.2rem;font-weight:300;line-height:1.15;letter-spacing:-0.02em}
+.masthead-sub{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted);text-align:right;line-height:2}
+
+.paper-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:3rem;max-width:1600px;margin:0 auto}
+.paper-nav{position:sticky;top:2rem;align-self:start;padding-left:2rem}
+.paper-nav-title{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.paper-nav a{display:block;color:var(--muted);text-decoration:none;margin-bottom:0.75rem;font-size:0.9rem;transition:all 0.2s ease}
+.paper-nav a:hover{color:var(--ink);transform:translateX(4px)}
+.paper-content{min-width:0}
+
+.section{padding:3rem 4rem;border-bottom:1px solid var(--rule);animation:fadeUp 0.4s ease both}
+.section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem}
+.section-title{font-size:1.8rem;font-weight:300;margin-bottom:1rem}
+.prose{font-size:1.2rem;line-height:1.9;max-width:760px;margin-bottom:1.5rem}
+
+/* map */
+.map-wrap{border:1px solid var(--rule);border-radius:2px;overflow:hidden;margin-top:1rem}
+.map-wrap img{display:block;width:100%}
+.map-caption{padding:0.75rem 1rem;border-top:1px solid var(--rule);font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase}
+
+/* timeline */
+.timeline{margin:1.5rem 0;border-left:2px solid var(--rule);padding-left:2rem}
+.tl-item{position:relative;margin-bottom:1.75rem}
+.tl-item::before{content:'';position:absolute;left:-2.45rem;top:0.45rem;width:8px;height:8px;border-radius:50%;background:var(--ink);border:2px solid var(--paper);outline:1px solid var(--ink)}
+.tl-year{font-family:'Space Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:0.2rem}
+.tl-text{font-size:1.1rem;line-height:1.7;color:var(--ink)}
+
+/* republic cards */
+.republic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:1.5rem}
+.republic-card{background:var(--paper);padding:1.25rem 1.5rem;position:relative;overflow:hidden}
+.republic-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.rc-1::after{background:#c0392b}
+.rc-2::after{background:#2980b9}
+.rc-3::after{background:#27ae60}
+.rc-4::after{background:#8e44ad}
+.rc-5::after{background:#d35400}
+.rc-6::after{background:#16a085}
+.republic-name{font-size:1.1rem;font-weight:500;margin-bottom:0.3rem}
+.republic-modern{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.06em;color:var(--muted);text-transform:uppercase;margin-bottom:0.5rem}
+.republic-desc{font-size:0.85rem;color:var(--muted);font-style:italic;line-height:1.6}
+
+/* video grid */
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1.5rem}
+.video-card{border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.video-card iframe{display:block;width:100%;aspect-ratio:16/9;border:none}
+.video-info{padding:0.85rem 1rem}
+.video-label{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.video-title{font-size:1rem;font-weight:300;line-height:1.4;color:var(--ink)}
+
+.bottom-nav{border-top:2px solid var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.bottom-nav a{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.bottom-nav a:hover{color:var(--ink)}
+
+@media (max-width:1100px){
+  .paper-layout{grid-template-columns:1fr}
+  .paper-nav{position:relative;top:auto;padding-left:0;margin-bottom:2rem}
+  .masthead{padding:1.5rem 1.5rem 1rem}
+  .section{padding:2rem 1.5rem}
+  .bottom-nav{padding:1.5rem}
+  .video-grid{grid-template-columns:1fr}
+  .republic-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .republic-grid{grid-template-columns:1fr}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <a href="index.html" class="masthead-back">&#8592; Back to Main Research</a>
+    <h1>Former Yugoslavia<br><span style="color:var(--geo);font-style:italic">Geographic &amp; Historical Context</span></h1>
+  </div>
+  <div class="masthead-sub">
+    Henry Art Gallery &middot; Eastern European Art<br>
+    ART H 209: Digital Art History<br>
+    Tatev, Jewel, Joseph, Hawa, Sophia, Charlie
+  </div>
+</div>
+
+<div class="paper-layout">
+
+  <aside class="paper-nav">
+    <div class="paper-nav-title">Contents</div>
+    <a href="index.html" style="color:var(--muted)">&#8592; Main Research</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">This Page</div>
+    <a href="#map" style="padding-left:0.75rem">The Map</a>
+    <a href="#republics" style="padding-left:0.75rem">The Six Republics</a>
+    <a href="#timeline" style="padding-left:0.75rem">Historical Timeline</a>
+    <a href="#videos" style="padding-left:0.75rem">Videos</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Research Pages</div>
+    <a href="index.html" style="padding-left:0.75rem">Main Research</a>
+    <a href="thread1.html" style="padding-left:0.75rem;color:var(--geo)">Thread 1 ↗</a>
+    <a href="thread2.html" style="padding-left:0.75rem;color:var(--floral)">Thread 2 ↗</a>
+  </aside>
+
+  <div class="paper-content">
+
+  <!-- MAP -->
+  <div id="map" class="section">
+    <div class="section-label" style="color:var(--geo)">Geography</div>
+    <div class="section-title">Former Yugoslavia in the Balkans</div>
+    <p class="prose">Yugoslavia, meaning "Land of the South Slavs," was a country in southeastern Europe that existed in various forms from 1918 to 1992, comprising six socialist republics: Slovenia, Croatia, Bosnia and Herzegovina, Serbia, Montenegro, and Macedonia.</p>
+    <div class="map-wrap">
+      <img src="images/map.png" alt="Map of Former Yugoslavia showing the six republics color-coded by region">
+      <div class="map-caption">Former Yugoslav territory &mdash; the six constituent republics color-coded by region.</div>
+    </div>
+  </div>
+
+  <!-- REPUBLICS -->
+  <div id="republics" class="section">
+    <div class="section-label" style="color:var(--geo)">Political Geography</div>
+    <div class="section-title">The Six Republics</div>
+    <div class="republic-grid">
+      <div class="republic-card rc-1">
+        <div class="republic-name">Croatia</div>
+        <div class="republic-desc">Adriatic coastline and inland plains. Centuries of Habsburg rule shaped a textile tradition with strong Central European influence.</div>
+      </div>
+      <div class="republic-card rc-2">
+        <div class="republic-name">Serbia</div>
+        <div class="republic-desc">Heartland of South Slavic culture and the Serbian Orthodox tradition. Under Ottoman rule until 1878.</div>
+      </div>
+      <div class="republic-card rc-3">
+        <div class="republic-name">Macedonia</div>
+        <div class="republic-desc">Under Ottoman rule until 1912 which was later than any other Yugoslav republic, shaping a distinctly geometric aesthetic tradition.</div>
+      </div>
+      <div class="republic-card rc-4">
+        <div class="republic-name">Bosnia &amp; Herzegovina</div>
+        <div class="republic-desc">A crossroads of Catholic, Orthodox, and Islamic traditions, reflecting centuries of both Habsburg and Ottoman influence.</div>
+      </div>
+      <div class="republic-card rc-5">
+        <div class="republic-name">Montenegro</div>
+        <div class="republic-desc">Small mountainous republic on the Adriatic coast with a strong tradition of independent highland culture.</div>
+      </div>
+      <div class="republic-card rc-6">
+        <div class="republic-name">Slovenia</div>
+        <div class="republic-desc">The northernmost republic, most heavily influenced by Central European Habsburg culture and the closest to Western Europe.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div id="timeline" class="section">
+    <div class="section-label" style="color:var(--both)">History</div>
+    <div class="section-title">A Brief Historical Timeline</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-year">Until 1878</div>
+        <div class="tl-text">Serbia and Montenegro under Ottoman rule.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Until 1912</div>
+        <div class="tl-text">Macedonia remains under Ottoman control, the last Yugoslav region to gain independence.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Until 1918</div>
+        <div class="tl-text">Croatia, Slovenia, and Bosnia-Herzegovina governed by the Austro-Hungarian Empire.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1918</div>
+        <div class="tl-text">Formation of the Kingdom of Serbs, Croats and Slovenes following World War I.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1929</div>
+        <div class="tl-text">Kingdom renamed the Kingdom of Yugoslavia under King Alexander I&apos;s dictatorship.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1930 &amp; 1936–37</div>
+        <div class="tl-text">Blanche Payne conducts two solo research trips through The Balkans & Yugoslavia documenting and collecting regional folk costumes.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1941–45</div>
+        <div class="tl-text">Yugoslavia occupied during World War II. Many regional traditions are disrupted or lost.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1945–92</div>
+        <div class="tl-text">Socialist Federal Republic of Yugoslavia under Tito. Folk traditions preserved as part of national cultural policy.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">1991–92</div>
+        <div class="tl-text">Yugoslavia dissolves into independent states following a series of wars.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEOS -->
+  <div id="videos" class="section">
+    <div class="section-label" style="color:var(--geo)">Further Viewing</div>
+    <div class="section-title">Videos: History &amp; Tradition</div>
+    <div class="video-grid">
+      <a href="https://www.youtube.com/watch?v=ZKjxpGLJW7s" target="_blank" class="video-card" style="text-decoration:none;color:inherit;display:block">
+        <div style="aspect-ratio:16/9;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+          <img src="https://img.youtube.com/vi/ZKjxpGLJW7s/hqdefault.jpg" alt="European Folk Costume" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
+          <div style="position:absolute;width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:16px solid var(--ink);margin-left:3px"></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <div class="video-label">Folk Dress</div>
+          <div class="video-title">European Folk Costume</div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=eMuMW4V8sUU" target="_blank" class="video-card" style="text-decoration:none;color:inherit;display:block">
+        <div style="aspect-ratio:16/9;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+          <img src="https://img.youtube.com/vi/eMuMW4V8sUU/hqdefault.jpg" alt="Cultural Differences in Yugoslavia" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
+          <div style="position:absolute;width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:16px solid var(--ink);margin-left:3px"></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <div class="video-label">Cultural History</div>
+          <div class="video-title">About Yugoslavia & Cultural Differences</div>
+        </div>
+      </a>
+      <a href="https://www.youtube.com/watch?v=C199Zt9pqKo" target="_blank" class="video-card" style="text-decoration:none;color:inherit;display:block">
+        <div style="aspect-ratio:16/9;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden">
+          <img src="https://img.youtube.com/vi/eMuMW4V8sUU/0.jpg" alt="Why Did Yugoslavia Collapse" style="width:100%;height:100%;object-fit:cover;opacity:0.85">
+          <div style="position:absolute;width:48px;height:48px;background:rgba(255,255,255,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center">
+            <div style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:16px solid var(--ink);margin-left:3px"></div>
+          </div>
+        </div>
+        <div class="video-info">
+          <div class="video-label">Political History</div>
+          <div class="video-title">Why Did Yugoslavia Collapse?</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  </div><!-- /paper-content -->
+</div><!-- /paper-layout -->
+
+<div class="bottom-nav">
+  <a href="index.html">&#8592; Back to Main Research</a>
+  <a href="thread1.html">Thread 1: Regional Granularity &#8594;</a>
+</div>
+
+</body>
+</html>
