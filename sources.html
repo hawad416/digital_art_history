@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sources — Yugoslav Textiles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1410;--paper:#ffffff;
+  --floral:#7a3a8a;--geo:#1e5c8a;--both:#b8860b;
+  --muted:#7a6a58;--rule:#d4c8b0;
+}
+body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',serif;min-height:100vh;overflow-x:hidden}
+
+.masthead{border-bottom:2px solid var(--ink);padding:2rem 4rem 1.25rem;display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem}
+.masthead-back{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:1rem;transition:color 0.2s}
+.masthead-back:hover{color:var(--ink)}
+.masthead h1{font-size:2.2rem;font-weight:300;line-height:1.15;letter-spacing:-0.02em}
+.masthead-sub{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted);text-align:right;line-height:2}
+
+.paper-layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:3rem;max-width:1600px;margin:0 auto}
+.paper-nav{position:sticky;top:2rem;align-self:start;padding-left:2rem}
+.paper-nav-title{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.paper-nav a{display:block;color:var(--muted);text-decoration:none;margin-bottom:0.75rem;font-size:0.9rem;transition:all 0.2s ease}
+.paper-nav a:hover{color:var(--ink);transform:translateX(4px)}
+.paper-content{min-width:0}
+
+.section{padding:3rem 4rem;border-bottom:1px solid var(--rule);animation:fadeUp 0.4s ease both}
+.section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem;color:var(--muted)}
+.section-title{font-size:1.8rem;font-weight:300;margin-bottom:1.5rem}
+
+/* citation entries */
+.cite-group{margin-bottom:3rem}
+.cite-group-label{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--rule);padding-bottom:0.5rem;margin-bottom:1.5rem}
+.cite-item{margin-bottom:1.75rem;padding-left:2rem;text-indent:-2rem}
+.cite-text{font-size:1.1rem;line-height:1.9;color:var(--ink)}
+.cite-text a{color:var(--geo);text-decoration:none;word-break:break-all}
+.cite-text a:hover{text-decoration:underline}
+.cite-note{font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.06em;color:var(--muted);margin-top:0.35rem;text-indent:0;padding-left:0}
+
+/* download cards */
+.download-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem}
+.download-card{border:1px solid var(--rule);padding:1.5rem;display:flex;align-items:center;gap:1.25rem;text-decoration:none;color:inherit;transition:border-color 0.2s,transform 0.2s}
+.download-card:hover{border-color:var(--ink);transform:translateY(-2px)}
+.download-icon{width:44px;height:44px;border:1px solid var(--rule);border-radius:2px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Space Mono',monospace;font-size:0.52rem;letter-spacing:0.04em;color:var(--muted);text-align:center;line-height:1.3}
+.download-info{}
+.download-label{font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem}
+.download-title{font-size:1rem;font-weight:300;line-height:1.4}
+.download-arrow{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--muted);margin-top:0.4rem}
+
+.bottom-nav{border-top:2px solid var(--ink);padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.bottom-nav a{font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+.bottom-nav a:hover{color:var(--ink)}
+
+@media (max-width:1100px){
+  .paper-layout{grid-template-columns:1fr}
+  .paper-nav{position:relative;top:auto;padding-left:0;margin-bottom:2rem}
+  .masthead{padding:1.5rem 1.5rem 1rem}
+  .section{padding:2rem 1.5rem}
+  .bottom-nav{padding:1.5rem}
+  .download-grid{grid-template-columns:1fr}
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div>
+    <a href="index.html" class="masthead-back">&#8592; Back to Main Research</a>
+    <h1>Sources &amp; Data<br><span style="color:var(--geo);font-style:italic">Citations, datasets, and further reading</span></h1>
+  </div>
+  <div class="masthead-sub">
+    Henry Art Gallery &middot; Eastern European Art<br>
+    ART H 209: Digital Art History<br>
+    Tatev, Jewel, Joseph, Hawa, Sophia, Charlie
+  </div>
+</div>
+
+<div class="paper-layout">
+
+  <aside class="paper-nav">
+    <div class="paper-nav-title">Contents</div>
+    <a href="index.html" style="color:var(--muted)">&#8592; Main Research</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">This Page</div>
+    <a href="#downloads" style="padding-left:0.75rem">Data &amp; Visualizations</a>
+    <a href="#primary" style="padding-left:0.75rem">Primary Sources</a>
+    <a href="#secondary" style="padding-left:0.75rem">Secondary Sources</a>
+    <a href="#video" style="padding-left:0.75rem">Video Sources</a>
+    <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Research Pages</div>
+    <a href="index.html" style="padding-left:0.75rem">Main Research</a>
+    <a href="thread1.html" style="padding-left:0.75rem;color:var(--geo)">Thread 1 ↗</a>
+    <a href="thread2.html" style="padding-left:0.75rem;color:var(--floral)">Thread 2 ↗</a>
+    <a href="yugoslavia.html" style="padding-left:0.75rem;color:var(--both)">Former Yugoslavia ↗</a>
+  </aside>
+
+  <div class="paper-content">
+
+  <!-- DOWNLOADS -->
+  <div id="downloads" class="section">
+    <div class="section-label">Data &amp; Visualizations</div>
+    <div class="section-title">Download Our Data</div>
+    <div class="download-grid">
+      <a href="https://docs.google.com/spreadsheets/u/1/d/1-2sSj78YJp2___aWUGDS5HRlOxbob6cxYZq4yEXQdp8/edit?usp=sharing" target="_blank" class="download-card">
+        <div class="download-icon">GOOGLE<br>SHEETS</div>
+        <div class="download-info">
+          <div class="download-label">Dataset</div>
+          <div class="download-title">Yugoslav Textile Collection - Classified Dataset</div>
+          <div class="download-arrow">Open in Google Sheets ↗</div>
+        </div>
+      </a>
+      <a href="YugoslaviaTestAgain.twbx" download class="download-card">
+        <div class="download-icon">TABLEAU<br>.TWBX</div>
+        <div class="download-info">
+          <div class="download-label">Tableau Workbook</div>
+          <div class="download-title">Yugoslav Textiles - Tableau Dashboard</div>
+          <div class="download-arrow">Download file ↓</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- PRIMARY SOURCES -->
+  <div id="primary" class="section">
+    <div class="section-label">Citations</div>
+    <div class="section-title">Primary Sources</div>
+
+    <div class="cite-group">
+      <div class="cite-group-label">Archives &amp; Collections</div>
+
+      <div class="cite-item">
+        <p class="cite-text">Payne, Blanche. <em>Blanche Payne Regional Costume Photograph and Drawing Collection.</em> University of Washington Libraries, Special Collections. Accessed 2026. <a href="https://content.lib.washington.edu/payneweb/" target="_blank">https://content.lib.washington.edu/payneweb/</a></p>
+        <p class="cite-note">Primary archive — photographs, drawings, and field notes from Payne's 1930 and 1936–37 Yugoslavia fieldwork.</p>
+      </div>
+
+      <div class="cite-item">
+        <p class="cite-text">Payne, Blanche. "Historical Background of Former Yugoslavia." <em>Blanche Payne Regional Costume Photograph and Drawing Collection.</em> University of Washington Libraries, Special Collections. Accessed 2026. <a href="https://content.lib.washington.edu/payneweb/history.html" target="_blank">https://content.lib.washington.edu/payneweb/history.html</a></p>
+        <p class="cite-note">Historical background section of the Payne archive — primary source for the quote on regional identity and national dress used throughout the main research.</p>
+      </div>
+
+    </div>
+
+    <div class="cite-group">
+      <div class="cite-group-label">Museum Collections</div>
+
+      <div class="cite-item">
+        <p class="cite-text">Henry Art Gallery. "Costume and Textiles." <em>Henry Art Gallery Collections.</em> University of Washington. Accessed 2026. <a href="https://henryart.org/collections/costume-textiles" target="_blank">https://henryart.org/collections/costume-textiles</a></p>
+        <p class="cite-note">Overview of the Henry Art Gallery's costume and textile holdings, including the history of the Costume and Textile Study Center and the Blanche Payne Collection.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECONDARY SOURCES -->
+  <div id="secondary" class="section">
+    <div class="section-label">Citations</div>
+    <div class="section-title">Secondary Sources</div>
+
+    <div class="cite-group">
+      <div class="cite-group-label">Historical Reference</div>
+
+      <div class="cite-item">
+        <p class="cite-text">"Yugoslavia." <em>1914–1918-Online: International Encyclopedia of the First World War.</em> Freie Universität Berlin. Accessed 2026. <a href="https://encyclopedia.1914-1918-online.net/article/yugoslavia/" target="_blank">https://encyclopedia.1914-1918-online.net/article/yugoslavia/</a></p>
+        <p class="cite-note">Used for historical context on the formation of Yugoslavia, the Kingdom of Serbs, Croats and Slovenes, and regional political history.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VIDEO SOURCES -->
+  <div id="video" class="section">
+    <div class="section-label">Citations</div>
+    <div class="section-title">Video Sources</div>
+
+    <div class="cite-group">
+      <div class="cite-group-label">YouTube — Featured on the Former Yugoslavia Page</div>
+
+      <div class="cite-item">
+        <p class="cite-text">"European Folk Costume." YouTube video. Accessed 2026. <a href="https://www.youtube.com/watch?v=ZKjxpGLJW7s" target="_blank">https://www.youtube.com/watch?v=ZKjxpGLJW7s</a></p>
+      </div>
+
+      <div class="cite-item">
+        <p class="cite-text">"About Yugoslavia &amp; Cultural Differences." YouTube video. Accessed 2026. <a href="https://www.youtube.com/watch?v=eMuMW4V8sUU" target="_blank">https://www.youtube.com/watch?v=eMuMW4V8sUU</a></p>
+      </div>
+
+      <div class="cite-item">
+        <p class="cite-text">"Why Did Yugoslavia Collapse?" YouTube video. Accessed 2026. <a href="https://www.youtube.com/watch?v=C199Zt9pqKo" target="_blank">https://www.youtube.com/watch?v=C199Zt9pqKo</a></p>
+      </div>
+
+    </div>
+  </div>
+
+  </div><!-- /paper-content -->
+</div><!-- /paper-layout -->
+
+<div class="bottom-nav">
+  <a href="index.html">&#8592; Back to Main Research</a>
+  <a href="yugoslavia.html">Former Yugoslavia &#8594;</a>
+</div>
+
+</body>
+</html>

@@ -8,7 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --ink:#1c1410;--paper:#f7f2e8;
+  --ink:#1c1410;--paper:#ffffff;
   --floral:#7a3a8a;--floral-light:#c49ad4;--floral-dim:#e8d8f2;
   --geo:#1e5c8a;--geo-light:#6aaed4;--geo-dim:#d0e6f4;
   --both:#b8860b;--both-light:#e8c84a;
@@ -126,6 +126,7 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
 
     <div style="font-family:'Space Mono',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin:1.25rem 0 0.4rem">Context</div>
     <a href="yugoslavia.html" style="padding-left:0.75rem;color:var(--both)">Former Yugoslavia ↗</a>
+    <a href="sources.html" style="padding-left:0.75rem;color:var(--muted)">Sources &amp; Data ↗</a>
   </aside>
 
   <div class="paper-content">
@@ -134,7 +135,6 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
   <div id="dataset-intro" class="section">
     <div class="section-title" style="color:var(--geo)">Dataset Introduction</div>
     <br>
-    <div class="section-title">The Henry Art Gallery&apos;s Yugoslav Textile Collection</div>
     <p class="prose">For our research, we were inspired by the collection of Eastern European textiles in the Henry Art Gallery, located on the University of Washington&apos;s campus in Seattle, Washington. Several of the costumes found in the Henry Art Gallery&apos;s exhibit were used for folk dancing and other traditional practices across Eastern Europe. Each piece found in this museum employs unique craftsmanship, from intricately woven pattern rugs to hand-stitched clothing and garments.</p>
 
     <div style="margin-top:1.5rem">
@@ -173,9 +173,9 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
 
     <br><br>
     <div id="selection-process" class="prose-label">Selection Process</div>
-    <p class="prose">Since our dataset consisted of thousands of textiles and objects, it was logical to condense the data into a series that is much more manageable. After careful consideration, our team decided that a large portion of our data included textiles from Yugoslavia. In fact, it appeared to be the focus of our dataset, so we decided to focus on Yugoslavia and remove the artifacts from all other regions.</p>
+    <p class="prose">We started out with a complete list of roughly 2000 data points in our Henry Art Gallery Eastern European data set. Since our dataset consisted of thousands of textiles and objects, it was logical to condense the data into a series that is much more manageable.</p>
+    <p class="prose">After careful consideration, our team decided that a large portion of our data included clothing and textiles from Yugoslavia. In fact, it appeared to be the focus of our dataset, so we decided to focus on Yugoslavia and remove the artifacts from all other regions. Two limitations with the given dataset is that some countries are more sampled than others and that there is a much larger pool of women&apos;s clothing than men&apos;s. We hypothesize a few reasons for this bias, one being that since Payne was a solo female researcher, she may have had easier access to photographing and collecting artifacts from women in villages. We also hypothesize it could be due to women&apos;s dress being more elaborate and varied. Payne&apos;s archive mentions women hand-made clothing for their families and their garments were more embellished, so perhaps there was more to document.</p>
     <p class="prose">After identifying the country we would be focusing on, our data set still included an overwhelming amount of information for each artifact, with a wide range of varying media. In order to determine the relationships between our variables, we first considered narrowing our data set to a single medium (i.e. photography). Upon further analysis, we decided to adjust our parameters and explore other media options. One of the greatest issues with our data set was how the textiles included several different styles and attributes, making it difficult to categorize each artifact for our research. Articles of clothing were sewn differently, featured an array of different patterns, and created for different regions of Yugoslavia. The research questions for this data set were then readjusted to determine how gender influenced the patterns and characteristics of Yugoslavian textiles.</p>
-
     <br><br>
     <div id="methodology" class="prose-label">Methodology: How the Study Was Designed</div>
     <p class="prose">After the initial refining of our data, we began to examine the relationships between the individual artifacts. Since the dataset includes such a wide variety of artifacts, it was difficult to determine the relationships between certain textiles. For instance, each article of clothing included different styles of sewing techniques (each was recorded in the dataset), featured different patterns, and was crafted in different areas of Yugoslavia.</p>
@@ -285,7 +285,9 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
         </div>
       </div>
     </div>
+    <p class="prose" style="margin-top:1.5rem">To try and overcome the frequency bias mentioned above when visualizing the data on a 2D map of Yugoslavia we instead looked at the proportion of floral to geometric patterns for each gender for a given country. This utilized an equation that leveraged the total number of clothes for that gender in a given country and then assigned a value that corresponds to either a greater percent of floral or geometric patterns. This worked by giving a country&apos;s score of -1 if all of that gender&apos;s garments were purely geometric, a score of 1 if all the clothes were floral, and 0 if it was a completely even split. An interesting pattern that we see is that every country had more geometric than floral patterns, however it was expected that the women had a higher proportion of florals in their garments. An outlier here is that men&apos;s Serbian clothes have more floral designs than women. All this being said, just because this equation assigned a proportion value relative to other countries as opposed to purely swinging the frequency of a count doesn&apos;t mean that the bias is eliminated. This means that outliers for countries with less data points can heavily skew the given value as opposed to a country with more data points.</p>
   </div>
+  
 
   <!-- GENDER / SLOPE -->
   <div id="gender-motif" class="section">
