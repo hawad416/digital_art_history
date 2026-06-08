@@ -26,7 +26,7 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
 .section{padding:3rem 4rem;border-bottom:1px solid var(--rule);animation:fadeUp 0.4s ease both}
 .section-label{font-family:'Space Mono',monospace;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem}
 .section-title{font-size:1.8rem;font-weight:300;margin-bottom:0.5rem}
-.section-desc{font-size:1.1rem;color:var(--muted);font-style:italic;line-height:1.7;max-width:640px;margin-bottom:2rem}
+.section-desc{font-size:1.1rem;color:var(--muted);line-height:1.7;max-width:640px;margin-bottom:2rem}
 .prose{font-size:1.2rem;line-height:1.9;max-width:760px;margin-bottom:1.5rem}
 .legend{display:flex;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
 .leg-item{display:flex;align-items:center;gap:0.5rem;font-family:'Space Mono',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.04em}
@@ -98,14 +98,15 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
   </div>
   <div class="masthead-sub">
     Henry Art Gallery &middot; Eastern European Art<br>
-    ART H 209: Digital Art History<br>
-    Tatev, Jewel, Joseph, Hawa, Sophia, Charlie
+    ART H 209: Digital Art History<br><br>
+    <strong>Team:</strong> Tatev Yeghiazaryan, Jewel Wass de Czege, <br>
+    Joseph Perkins, Hawa Drammeh,<br>Sophia Macariola, Charlie Gaebe
   </div>
 </div>
 
 <div class="thread-banner">
   <div>
-    <div class="thread-banner-label">Further Inquiry &mdash; Thread 2</div>
+    <div class="thread-banner-label">Further Inquiry: Thread 2</div>
     <div class="thread-banner-title">Does garment type predict floral motif more strongly than country or gender?</div>
   </div>
 </div>
@@ -129,13 +130,17 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
   <div id="t2-overview" class="section">
     <div class="section-label" style="color:var(--floral)">Thread 2 &mdash; Object Type Patterns</div>
     <div class="section-title">Does garment type predict floral motif more strongly than country or gender?</div>
-    <div class="section-desc">Thread 2 investigates whether the function of a garment correlates with its motif. The hypothesis: garments worn close to the face or used as identity-expressing accessories (kerchiefs, caps) should concentrate floral motifs, while structural items (shoes, sashes) should skew geometric. The data largely supports this but with important regional caveats from Thread 1. Note: these visualizations draw on the broader dataset that includes the object type column, which was not available in the Tableau analysis.</div>
+    <div class="section-desc">Thread 2 investigates whether the function of a garment correlates with its motif. The hypothesis: garments worn close to the face or used as identity-expressing accessories (kerchiefs, caps) should concentrate floral motifs, while structural items (shoes, sashes) should skew geometric. The data largely supports this but with important regional caveats from Thread 1. Note: these visualizations draw on the broader dataset that includes the object type column, which was not utilized in our Tableau analysis.</div>
 
     <div class="callout-row">
       <div class="callout"><div class="num" style="color:var(--floral)">80%</div><div class="lbl">Kerchief floral rate</div><div class="sub">most floral garment type (n=41)</div></div>
       <div class="callout"><div class="num" style="color:var(--geo)">4%</div><div class="lbl">Shoe floral rate</div><div class="sub">least floral garment type (n=47)</div></div>
       <div class="callout"><div class="num" style="color:var(--neither)">5%</div><div class="lbl">Sash floral rate</div><div class="sub">nearly as low as shoes (n=21)</div></div>
     </div>
+
+    <hr style="border:none;border-top:1px solid var(--rule);margin:2rem 0">
+    <br><br>
+    <p style="font-family:'Space Mono',monospace;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem">Legend for bar charts below</p>
 
     <div class="legend">
       <div class="leg-item"><div class="leg-swatch" style="background:var(--floral)"></div>Floral only</div>
@@ -157,12 +162,12 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
       <span class="country-name">Floral rate by garment type &times; country</span>
       <span class="country-badge">Heatmap &mdash; darker = higher floral rate</span>
     </div>
-    <p class="country-flag" style="margin-bottom:0.5rem">Each cell shows the number of items and the floral inclusion rate for that garment type and country combination. Empty cells mean that garment type does not appear in that country&apos;s collection &mdash; itself a curatorial signal.</p>
+    <p class="country-flag" style="margin-bottom:0.5rem">Each cell shows the number of items and the floral inclusion rate for that garment type and country combination. Empty cells mean that garment type does not appear in that country&apos;s collection which is itself a curatorial signal.</p>
     <div class="heat-wrap" id="heatmap-wrap"></div>
 
     <div class="insight">
       <div class="insight-label">What the heatmap reveals</div>
-      <p>Croatia&apos;s kerchief column is the darkest in the table (92% floral), reflecting Posavina&apos;s dominance. Serbia&apos;s stocking cell is also notably dark (80%) &mdash; driven entirely by Sumadija men&apos;s ceremonial stockings. <strong>Macedonia and Serbia&apos;s apron cells are both present but much lighter than Croatia&apos;s</strong>, confirming that the same garment type carries different motif traditions across regions.</p>
+      <p>Croatia&apos;s kerchief column is the darkest in the table (92% floral), reflecting Posavina&apos;s dominance. Serbia&apos;s stocking cell is also notably dark (80%), driven entirely by Sumadija men&apos;s ceremonial stockings. <strong>Macedonia and Serbia&apos;s apron cells are both present but much lighter than Croatia&apos;s</strong>, confirming that the same garment type carries different motif traditions across regions.</p>
     </div>
   </div>
 
@@ -171,12 +176,12 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
       <span class="country-name">Does the kerchief pattern hold across regions?</span>
       <span class="country-badge">Kerchief floral rate by region</span>
     </div>
-    <p class="country-flag" style="margin-bottom:1.5rem">If garment type truly predicts motif regardless of region, the kerchief should be predominantly floral everywhere. This mostly holds &mdash; but with one significant exception in Macedonia.</p>
+    <p class="country-flag" style="margin-bottom:1.5rem">If garment type truly predicts motif regardless of region, the kerchief should be predominantly floral everywhere. This mostly holds, but with one significant exception in Macedonia.</p>
     <div id="kerchief-regional"></div>
 
     <div class="insight">
       <div class="insight-label">The kerchief caveat</div>
-      <p>The overall 80% kerchief floral rate is <strong>heavily driven by Posavina&apos;s 20 kerchiefs at 90% floral</strong>. Macedonia&apos;s Debar and Pelagonija kerchiefs are 0% floral. Regional tradition can override garment-type tendency &mdash; which reinforces Thread 1&apos;s finding that region is the stronger predictor of motif.</p>
+      <p>The overall 80% kerchief floral rate is <strong>heavily driven by Posavina&apos;s 20 kerchiefs at 90% floral</strong>. Macedonia&apos;s Debar and Pelagonija kerchiefs are 0% floral. Regional tradition can override garment-type tendency, which reinforces Thread 1&apos;s finding that region is the stronger predictor of motif.</p>
     </div>
   </div>
 
@@ -185,17 +190,17 @@ body{background:var(--paper);color:var(--ink);font-family:'Cormorant Garamond',s
       <span class="country-name">The stocking anomaly</span>
       <span class="country-badge">Men&apos;s vs women&apos;s stockings by region</span>
     </div>
-    <p class="country-flag" style="margin-bottom:1.5rem">Overall stockings are 27% floral. But men&apos;s stockings (53% floral) are more floral than women&apos;s (20%) &mdash; inverting the gender hypothesis for this one garment type.</p>
+    <p class="country-flag" style="margin-bottom:1.5rem">Overall stockings are 27% floral. But men&apos;s stockings (53% floral) are more floral than women&apos;s (20%), inverting the gender hypothesis for this one garment type.</p>
     <div id="stocking-anomaly"></div>
 
     <div class="insight">
       <div class="insight-label">Why the stocking anomaly is a curatorial story</div>
-      <p>Serbia&apos;s Sumadija contributes 12 men&apos;s stockings &mdash; <strong>all 100% floral</strong>. These were ceremonial pieces, likely selected precisely because of their elaborate embroidery. <em>This is the most direct example in this dataset of how Blanche Payne&apos;s selection criteria shaped our findings.</em></p>
+      <p>Serbia&apos;s Sumadija contributes 12 men&apos;s stockings that are <strong>all 100% floral</strong>. These were ceremonial pieces, likely selected precisely because of their elaborate embroidery. <em>This is the most direct example in this dataset of how Blanche Payne&apos;s selection criteria shaped our findings.</em></p>
     </div>
 
     <div class="method-box">
       <div class="method-label">Methodology &amp; exclusions</div>
-      <p>Floral inclusion rate = items where floral = yes divided by total items of that type. All calculations use the 500 classified rows. Garment types with n&ge;10 are shown in the main proportional bars. Items with n&lt;10 are shown in the heatmap but should not be interpreted as cultural signals &mdash; they reflect collection gaps.</p>
+      <p>Floral inclusion rate = items where floral = yes divided by total items of that type. All calculations use the 500 classified rows. Garment types with n&ge;10 are shown in the main proportional bars. Items with n&lt;10 are shown in the heatmap but should not be interpreted as cultural signals since they reflect collection gaps.</p>
     </div>
   </div>
 
